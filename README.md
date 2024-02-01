@@ -1,2 +1,2 @@
-# Spelling-Bee-Game
+# Word-Game
 CS Special Topics
