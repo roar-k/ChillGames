@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Board : MonoBehaviour
 {   
@@ -27,6 +29,11 @@ public class Board : MonoBehaviour
     public Tile.State correctState;
     public Tile.State wrongSpotState;
     public Tile.State incorrectState;
+
+    [Header("UI")]
+    public GameObject invalidWordText;
+    public Button mainMenuButton;
+    public Button playAgainButton;
 
     private void Awake() {
         rows = GetComponentsInChildren<Row>();
@@ -59,8 +66,11 @@ public class Board : MonoBehaviour
         // Backspacing or deleting letters
         if (Input.GetKeyDown(KeyCode.Backspace)) {
             columnIndex = Mathf.Max(columnIndex - 1, 0);
+
             currentRow.tiles[columnIndex].SetLetter('\0');
             currentRow.tiles[columnIndex].SetState(emptyState);
+
+            invalidWordText.gameObject.SetActive(false);
         }
 
         // Checks to see if out of bounds, if yes, submit row
@@ -83,28 +93,95 @@ public class Board : MonoBehaviour
             }
         }
     }
-    // Checks if submit word matches the solution
+
     private void SubmitRow(Row row) {
-        // Sets the tiles to the corresponding state
+        if (!IsValidWord(row.word)) {
+            invalidWordText.gameObject.SetActive(true);
+            return;
+        }
+
+        string remaining = word;
+
         for (int i = 0; i < row.tiles.Length; i++) {
             Tile tile = row.tiles[i];
+
+            // Checks if the letter matches the solution
             if (tile.letter == word[i]) {
                 tile.SetState(correctState);
+
+                remaining = remaining.Remove(i, 1);
+                remaining = remaining.Insert(i, " ");
             }
-            else if (word.Contains(tile.letter)) {
-                tile.SetState(wrongSpotState);
-            }
-            else {
+
+            // Checks if the letter is completely incorrect
+            else if (!word.Contains(tile.letter)) {
                 tile.SetState(incorrectState);
             }
+        }
+
+        // Compares remaining letters to see if letters are correct but in wrong spot
+        for (int i = 0; i < row.tiles.Length; i++) {
+            Tile tile = row.tiles[i];
+
+            if (tile.state != correctState && tile.state != incorrectState) {
+                if (remaining.Contains(tile.letter)) {
+                    tile.SetState(wrongSpotState);
+
+                    int index = remaining.IndexOf(tile.letter);
+                    remaining = remaining.Remove(index, 1);
+                    remaining = remaining.Insert(index, " " );
+                }
+                else {
+                    tile.SetState(incorrectState);
+                }
+            }
+        }
+
+        // Disables script when player has won
+        if (HasWon(row)) {
+            enabled = false;
         }
 
         rowIndex++;
         columnIndex = 0;
 
-        // Disables script when run out of columns (temp)
+        // Disables script when run out of columns
         if (rowIndex >= rows.Length) {
             enabled = false;
         }
+    }
+
+    // Checks to see if the word submitted is in the valid words list
+    private bool IsValidWord(string word) {
+        for (int i = 0; i < validWords.Length; i++) {
+            if (validWords[i] == word) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Checks if the player has won the game or not
+    private bool HasWon(Row row) {
+        for (int i = 0; i < row.tiles.Length; i++) {
+            if (row.tiles[i].state != correctState) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Main Menu and Play Again buttons disappear when script is enabled
+    private void OnEnable() {
+        mainMenuButton.gameObject.SetActive(false);
+        playAgainButton.gameObject.SetActive(false);
+    }
+
+    // Main Menu and Play Again buttons appear when script is disabled
+    private void OnDisable() {
+        mainMenuButton.gameObject.SetActive(true);
+        playAgainButton.gameObject.SetActive(true);
     }
 }
