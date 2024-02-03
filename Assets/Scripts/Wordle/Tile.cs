@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -14,9 +13,10 @@ public class Tile : MonoBehaviour
         text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
+    // Sets the tile to that letter
     public void SetLetter(char letter) {
         this.letter = letter;
-        text.text = letter.toString();
+        text.text = letter.ToString();
 
     }
 }
