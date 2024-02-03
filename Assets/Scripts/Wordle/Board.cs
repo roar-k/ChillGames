@@ -43,6 +43,18 @@ public class Board : MonoBehaviour
         LoadData();
         SetRandomWord();
     }
+
+    public void PlayAgain() {
+        ClearBoard();
+        SetRandomWord();
+
+        enabled = true;
+    }
+
+    public void MainMenu() {
+        //...
+    }
+
     // Loads all the words
     private void LoadData() {
         // Loads all valid words
@@ -149,6 +161,19 @@ public class Board : MonoBehaviour
         if (rowIndex >= rows.Length) {
             enabled = false;
         }
+    }
+    
+    // Loops through each tile on board and sets them to a null letter and empty state
+    private void ClearBoard() {
+        for (int row = 0; row < rows.Length; row++) {
+            for (int col = 0; col < rows[row].tiles.Length; col++) {
+                rows[row].tiles[col].SetLetter('\0');
+                rows[row].tiles[col].SetState(emptyState);
+            }
+        }
+
+        rowIndex = 0;
+        columnIndex = 0;
     }
 
     // Checks to see if the word submitted is in the valid words list
