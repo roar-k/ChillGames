@@ -11,6 +11,8 @@ public class Tiles : MonoBehaviour
     public TileCell cell { get; private set; }
     public int number { get; private set; }
 
+    public bool locked { get; set; }
+
     private Image background;
     private TextMeshProUGUI text;
 
@@ -30,7 +32,7 @@ public class Tiles : MonoBehaviour
         text.text = number.ToString();
     }
 
-    // Spawns a tile at a particular cell
+    // Spawns a tile at a random cell
     public void Spawn(TileCell cell) {
         if (this.cell != null) {
             this.cell.tile = null;
@@ -41,6 +43,7 @@ public class Tiles : MonoBehaviour
         transform.position = cell.transform.position;
     }
 
+    // Animates the tile when it moves
     public void MoveTo(TileCell cell) {
         if (this.cell != null) {
             this.cell.tile = null;
@@ -48,11 +51,25 @@ public class Tiles : MonoBehaviour
         this.cell = cell;
         this.cell.tile = this;
 
-        StartCoroutine(Animate(cell.transform.position));
+        StartCoroutine(Animate(cell.transform.position, false));
+    }
+
+    public void Merge(TileCell cell) {
+        if (this.cell != null) {
+            this.cell.tile = null;
+        }
+
+        // Sets cell to null because cell will be merged and destroyed
+        this.cell = null;
+        // Locks the cell so that tiles don't double merge
+        cell.tile.locked = true;
+
+        StartCoroutine(Animate(cell.transform.position, true));
+
     }
 
     // Animates the tile movement
-    private IEnumerator Animate(Vector3 to) {
+    private IEnumerator Animate(Vector3 to, bool merging) {
         float elapsed = 0f;
         float duration = 0.1f;
 
@@ -66,5 +83,9 @@ public class Tiles : MonoBehaviour
 
         transform.position = to;
 
+        // Destroys tile if it is merging
+        if (merging) {
+            Destroy(gameObject);
+        }
     }
 }
