@@ -69,6 +69,8 @@ public class GameManager_2048 : MonoBehaviour
         this.score = score;
 
         scoreText.text = score.ToString();
+
+        SaveHiscore();
     }
 
     // Sets the high score box to the high score

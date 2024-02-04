@@ -20,7 +20,7 @@ public class Board : MonoBehaviour
     
     private string[] solutions;
     private string[] validWords;
-    private string word;
+    public string word;
     private int rowIndex;
     private int columnIndex;
 
