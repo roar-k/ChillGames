@@ -4,7 +4,8 @@ using UnityEngine;
 
 // Script for the Board in 2048, added to Board object in 2048
 public class TileBoard : MonoBehaviour
-{
+{   
+    public GameManager_2048 gameManager;
     public Tiles tilePrefab;
     public TileState[] tileStates;
     private TileGrid grid;
@@ -16,14 +17,22 @@ public class TileBoard : MonoBehaviour
         tiles = new List<Tiles>(16);
     }
 
-    // Creates two tiles on the board when game starts
-    private void Start() {
-        CreateTile();
-        CreateTile();
+    // Clears the board when game is over
+    public void ClearBoard() {
+        foreach (var cell in grid.cells) {
+            cell.tile = null;
+        }
+
+        foreach (var tile in tiles) {
+            Destroy(tile.gameObject);
+        }
+
+        tiles.Clear();
+        
     }
 
     // Default value of a tile is 2 (can change)
-    private void CreateTile() {
+    public void CreateTile() {
         Tiles tile = Instantiate(tilePrefab, grid.transform);
         tile.SetState(tileStates[0], 2);
         tile.Spawn(grid.GetRandomEmptyCell());
@@ -114,6 +123,8 @@ public class TileBoard : MonoBehaviour
         int number = b.number * 2;
 
         b.SetState(tileStates[index], number);
+
+        gameManager.IncreaseScore(number);
     }
 
     private int IndexOf(TileState state) {
@@ -142,6 +153,41 @@ public class TileBoard : MonoBehaviour
             CreateTile();
         }
 
-        // TODO: check for game over
+        if (CheckForGameOver()) {
+            gameManager.GameOver();
+        }
+    }
+
+    // When there are no more tiles to move in, Game is over!
+    private bool CheckForGameOver() {
+        if (tiles.Count != grid.size) {
+            return false;
+        }
+
+        // When board is full, but tiles can still be merged, game is not over
+        foreach (var tile in tiles) {
+            TileCell up = grid.GetAdjacentCell(tile.cell, Vector2Int.up);
+            TileCell down = grid.GetAdjacentCell(tile.cell, Vector2Int.down);
+            TileCell left = grid.GetAdjacentCell(tile.cell, Vector2Int.left);
+            TileCell right = grid.GetAdjacentCell(tile.cell, Vector2Int.right);
+
+            if (up != null && CanMerge(tile, up.tile)) {
+                return false;
+            }
+
+            if (down != null && CanMerge(tile, down.tile)) {
+                return false;
+            }
+
+            if (left != null && CanMerge(tile, left.tile)) {
+                return false;
+            }
+
+            if (right != null && CanMerge(tile, right.tile)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
