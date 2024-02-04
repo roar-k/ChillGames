@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// Script for each tile in Wordle, add to Tile object in Wordle
 public class Tile : MonoBehaviour
 {
     [System.Serializable]

@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+// Script for the Row in 2048, added to the Row object in 2048
 public class TileRow : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TileCell[] cells { get; private set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Awake() {
+        cells = GetComponentsInChildren<TileCell>();
     }
 }

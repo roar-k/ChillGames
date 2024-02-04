@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// Script for the game board in Wordle, add to Board object in Wordle
 public class Board : MonoBehaviour
 {   
     // Array of all the letters in the Alphabet

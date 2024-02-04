@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+// Script for the tile cells in 2048, added to cell object in 2048
 public class TileCell : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector2Int coordinates { get; set; }
+    public Tiles tile { get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool empty => tile == null;
+    public bool occupied => tile != null;
 }
