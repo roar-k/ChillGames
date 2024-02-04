@@ -9,7 +9,7 @@ public class GameManager_2048 : MonoBehaviour
     public TileBoard board;
     public CanvasGroup gameOver;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI bestScoreText;
+    public TextMeshProUGUI hiscoreText;
 
     private int score;
 
@@ -20,7 +20,7 @@ public class GameManager_2048 : MonoBehaviour
     // Clears the board and adds 2 tiles onto board when New Game has started
     public void NewGame() {
         SetScore(0);
-        bestScoreText.text = LoadHiscore().ToString();
+        hiscoreText.text = LoadHiscore().ToString();
 
         gameOver.alpha = 0f;
         gameOver.interactable = false;
@@ -81,7 +81,7 @@ public class GameManager_2048 : MonoBehaviour
     }
 
     // Loads the player's highscore
-    private int LoadHiscore() {
+    public int LoadHiscore() {
         return PlayerPrefs.GetInt("hiscore", 0);
     }
 }
