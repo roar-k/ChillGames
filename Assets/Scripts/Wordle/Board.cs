@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// Script for the game board in Wordle, add to Board object in Wordle
 public class Board : MonoBehaviour
 {   
     // Array of all the letters in the Alphabet
@@ -19,7 +20,7 @@ public class Board : MonoBehaviour
     
     private string[] solutions;
     private string[] validWords;
-    private string word;
+    public string word;
     private int rowIndex;
     private int columnIndex;
 
@@ -177,13 +178,12 @@ public class Board : MonoBehaviour
     }
 
     // Checks to see if the word submitted is in the valid words list
-    private bool IsValidWord(string word) {
+    private bool  IsValidWord(string word) {
         for (int i = 0; i < validWords.Length; i++) {
-            if (validWords[i] == word) {
+            if (validWords[i].ToLower().Trim() == word) {
                 return true;
             }
         }
-
         return false;
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script for each row in Wordle, add to Row object in Wordle
 public class Row : MonoBehaviour
 {
     // Array of the tiles
