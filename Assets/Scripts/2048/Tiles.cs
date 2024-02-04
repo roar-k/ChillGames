@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -46,7 +48,23 @@ public class Tiles : MonoBehaviour
         this.cell = cell;
         this.cell.tile = this;
 
-        // Animates the tile movement
-        transform.position = cell.transform.position;
+        StartCoroutine(Animate(cell.transform.position));
+    }
+
+    // Animates the tile movement
+    private IEnumerator Animate(Vector3 to) {
+        float elapsed = 0f;
+        float duration = 0.1f;
+
+        Vector3 from = transform.position;
+
+        while (elapsed < duration) {
+            transform.position = Vector3.Lerp(from, to, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = to;
+
     }
 }
