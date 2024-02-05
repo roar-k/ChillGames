@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8989350090141269679}
   - component: {fileID: 7906608417326180577}
-  - component: {fileID: -3233158769387652346}
   - component: {fileID: -6616224474817239556}
+  - component: {fileID: 4986237129067426446}
   m_Layer: 0
   m_Name: Letter Tile
   m_TagString: Untagged
@@ -86,18 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-3233158769387652346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 539810168455503872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d8064c0d5cb94409f031686ae6553c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &-6616224474817239556
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4986237129067426446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539810168455503872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b9b96fb703153408747b699b7b88e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
