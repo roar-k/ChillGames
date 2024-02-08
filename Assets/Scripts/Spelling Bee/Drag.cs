@@ -7,26 +7,20 @@ public class Drag : MonoBehaviour
     private bool dragging = false;
     private Vector3 offset;
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
-    void Update()
-    {
-        //Move object, take unto account original offset
+    void Update() {
+        //Move object, take into account original offset
         if (dragging) {
-            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+            Vector3 Temp = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, 0f, 0f);
+
+            transform.position = Temp + offset;
         }
     }
 
     private void OnMouseDown() {
         //Record the difference betweem the objects center, and the clicked point on the camera plane.
-        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 Temp2 = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, 0f, 0f);
+        offset = transform.position - Temp2;
         dragging = true;
     }
 
@@ -34,9 +28,5 @@ public class Drag : MonoBehaviour
         //Stop Dragging
         dragging = false;
     }
-
-
-
-
 
 }
