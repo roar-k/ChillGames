@@ -6,23 +6,23 @@ using TMPro;
 
 public class WordGameBoard : MonoBehaviour
 {
+    [Header("Text Files")]
     public string[] threeLetterWords;
     public string[] fourLetterWords;
     public string[] fiveLetterWords;
     public string[] sixLetterWords;
     public string[] validWords;
 
-    private WordRow[] row;
+    [Header("Game Objects")]
+    public LetterSquare[] squares;
 
-    private char[] letters;
-
-    private int index;
-
+    [Header("Solution")]
     public string word;
 
     private void Start() {
         LoadData();
         SetRandomWord();
+        SetWord();
     }
 
     // Loads in all the valid words into the game from a text file
@@ -49,16 +49,31 @@ public class WordGameBoard : MonoBehaviour
         word = word.ToLower().Trim();
     }
 
-    // Sets the squares to the word
+    // Sets the squares to the word and scrambles the letters
     private void SetWord() {
-        /* for (int i = 0; i < word.Length; i++) {
-            letters[i] = word[i];
+        string scrambledWord = ScrambleWord(word);
+        // Makes sure the scrambled word does not match the solution
+        while (scrambledWord == word) {
+            ScrambleWord(word);
         }
 
-        for (int i = 0; i < row.Length; i++) {
-            row[i].squares.SetLetter(letters[i]);
+        for (int i = 0; i < squares.Length; i++) {
+            squares[i].SetLetter(scrambledWord[i]);
         }
-        */
+    }
+
+    // Shuffles the letters in the word
+    public static string ScrambleWord(string str) {
+        char[] array = str.ToCharArray();
+        int n = array.Length;
+        while (n > 1) {
+            n--;
+            int k = Random.Range(0, n + 1);
+            var value = array[k];
+            array[k] = array[n];
+            array[n] = value;
+        }
+        return new string(array);
     }
 
     // Checks to see if the word matches the solution

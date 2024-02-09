@@ -6,9 +6,9 @@ using TMPro;
 
 public class LetterSquare : MonoBehaviour
 {
-    private TextMeshProUGUI text;
+    public TextMeshProUGUI text;
     
-    public char letter { get; private set; }
+    public char letter { get; set; }
 
     private void Awake() {
         text = GetComponentInChildren<TextMeshProUGUI>();
