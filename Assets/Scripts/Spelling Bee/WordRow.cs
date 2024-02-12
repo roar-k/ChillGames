@@ -25,4 +25,5 @@ public class WordRow : MonoBehaviour
     private void Awake() {
         squares = GetComponentsInChildren<LetterSquare>();
     }
+
 }

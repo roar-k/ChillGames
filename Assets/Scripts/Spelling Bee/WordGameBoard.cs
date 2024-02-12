@@ -19,10 +19,18 @@ public class WordGameBoard : MonoBehaviour
     [Header("Solution")]
     public string word;
 
+    private int solved;
+
     private void Start() {
         LoadData();
         SetRandomWord();
         SetWord();
+        solved = 0;
+    }
+
+    private void Update() {
+        // MatchesWord();
+        // NextWord();
     }
 
     // Loads in all the valid words into the game from a text file
@@ -45,8 +53,26 @@ public class WordGameBoard : MonoBehaviour
 
     // Sets the solution to a random word in the valid words list
     private void SetRandomWord() {
-        word = threeLetterWords[Random.Range(0, threeLetterWords.Length)];
-        word = word.ToLower().Trim();
+        // Gives a 3 letter word to solve until you have solved 5
+        if (solved < 5) {
+            word = threeLetterWords[Random.Range(0, threeLetterWords.Length)];
+            word = word.ToLower().Trim();
+        }
+        // Gives a 4 letter word to solve once you have solved five 3 letter words
+        else if (solved < 10) {
+            word = fourLetterWords[Random.Range(0, fourLetterWords.Length)];
+            word = word.ToLower().Trim();
+        }
+        // Gives a 5 letter word to solve once you have solved five 4 letter words
+        else if (solved < 15) {
+            word = fiveLetterWords[Random.Range(0, fiveLetterWords.Length)];
+            word = word.ToLower().Trim();
+        }
+
+        else if (solved < 20) {
+            word = sixLetterWords[Random.Range(0, sixLetterWords.Length)];
+            word = word.ToLower().Trim();
+        }
     }
 
     // Sets the squares to the word and scrambles the letters
@@ -65,24 +91,37 @@ public class WordGameBoard : MonoBehaviour
     // Shuffles the letters in the word
     public static string ScrambleWord(string str) {
         char[] array = str.ToCharArray();
-        int n = array.Length;
-        while (n > 1) {
-            n--;
-            int k = Random.Range(0, n + 1);
-            var value = array[k];
-            array[k] = array[n];
-            array[n] = value;
+        int length = array.Length;
+        while (length > 1) {
+            length--;
+            int rand = Random.Range(0, length + 1);
+            var value = array[rand];
+            array[rand] = array[length];
+            array[length] = value;
         }
         return new string(array);
     }
 
     // Checks to see if the word matches the solution
-    private bool IsValidWord(string word) {
-        for (int i = 0; i < validWords.Length; i++) {
-            if (validWords[i].ToLower().Trim() == word) {
-                return true;
-            }
+    private bool MatchesWord() {
+        string match = "";
+        for (int i = 0; i < squares.Length; i++) {
+            match += squares[i].letter;
         }
+        
+        if (match == word) {
+            return true;
+        }
+
         return false;
+    }
+
+    // Goes to the next word
+    private void NextWord() {
+        if (MatchesWord()) {
+            SetRandomWord();
+            SetWord();
+            solved++;
+        }
     }
 }
