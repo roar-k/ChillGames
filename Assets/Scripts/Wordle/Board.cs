@@ -178,7 +178,7 @@ public class Board : MonoBehaviour
     }
 
     // Checks to see if the word submitted is in the valid words list
-    private bool  IsValidWord(string word) {
+    private bool IsValidWord(string word) {
         for (int i = 0; i < validWords.Length; i++) {
             if (validWords[i].ToLower().Trim() == word) {
                 return true;
