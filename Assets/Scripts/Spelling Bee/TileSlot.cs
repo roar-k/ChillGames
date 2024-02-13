@@ -6,12 +6,10 @@ using UnityEngine.EventSystems;
 public class TileSlot : MonoBehaviour
 {
     public void OnDrop(BaseEventData data) {
-        Debug.Log("OnDrop");
-        PointerEventData pointerData = (PointerEventData) data;
+        PointerEventData eventData = (PointerEventData) data;
 
-        if (pointerData.pointerDrag != null) {
-            pointerData.pointerDrag.GetComponent<RectTransform>().anchoredPosition =
-            GetComponent<RectTransform>().anchoredPosition;
-        }
+        GameObject dropped = eventData.pointerDrag;
+        TileDrag tileDrag = dropped.GetComponent<TileDrag>();
+        tileDrag.parentAfterDrag = transform;
     }
 }

@@ -6,51 +6,46 @@ using UnityEngine.EventSystems;
 
 public class TileDrag : MonoBehaviour
 {
-    [SerializeField]
-    private Canvas canvas;
+    [HideInInspector]
+    public Transform parentAfterDrag;
 
-    private RectTransform rectTransform;
     private Image image;
 
     private void Start() {
-        rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();
     }
 
+    // Sets the object at a certain Y level so it can only move left and right
     private void Update() {
-        transform.position = new Vector3(transform.position.x, 410, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 397, transform.position.z);
     }
 
     public void OnBeginDrag(BaseEventData data) {
-        Debug.Log("BeginDrag");
         PointerEventData eventData = (PointerEventData) data;
 
+        parentAfterDrag = transform.parent;
+        transform.SetParent(transform.root);
+        transform.SetAsLastSibling();
+
+        // When object begins dragging, image fades a little
         image.color = new Color32(255, 255, 255, 170);
+        image.raycastTarget = false;
     }
 
     public void OnDrag(BaseEventData data) {
-        Debug.Log("Dragging");
         PointerEventData eventData = (PointerEventData) data;
 
-        rectTransform.position = Input.mousePosition;
+        transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(BaseEventData data) {
-        Debug.Log("EndDrag");
         PointerEventData eventData = (PointerEventData) data;
 
+        transform.SetParent(parentAfterDrag);
+
+        // When object finishes dragging, image fades back to its normal color
         image.color = new Color(255, 255, 255, 255);
+        image.raycastTarget = true;
     }
-
-   /*public void DragHandler(BaseEventData data) {
-    PointerEventData pointerData = (PointerEventData) data;
-
-    Vector2 position;
-    RectTransformUtility.ScreenPointToLocalPointInRectangle(
-        (RectTransform) canvas.transform, pointerData.position,
-        canvas.worldCamera, out position);
-
-        transform.position = canvas.transform.TransformPoint(position);
-   }*/
 
 }
