@@ -15,6 +15,7 @@ public class WordGameBoard : MonoBehaviour
 
     [Header("Game Objects")]
     public LetterSquare[] squares;
+    public LetterSquare square;
 
     [Header("Solution")]
     public string word;
@@ -124,4 +125,8 @@ public class WordGameBoard : MonoBehaviour
             solved++;
         }
     }
+
+    /* private void AddSquare() {
+        squares(Instantiate(square));
+    } */
 }
