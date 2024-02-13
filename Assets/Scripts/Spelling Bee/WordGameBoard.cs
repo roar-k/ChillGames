@@ -15,6 +15,7 @@ public class WordGameBoard : MonoBehaviour
 
     [Header("Game Objects")]
     public LetterSquare[] squares;
+    public LetterSquare square;
 
     [Header("Solution")]
     public string word;
@@ -89,7 +90,7 @@ public class WordGameBoard : MonoBehaviour
     }
 
     // Shuffles the letters in the word
-    public static string ScrambleWord(string str) {
+    private static string ScrambleWord(string str) {
         char[] array = str.ToCharArray();
         int length = array.Length;
         while (length > 1) {
@@ -99,6 +100,7 @@ public class WordGameBoard : MonoBehaviour
             array[rand] = array[length];
             array[length] = value;
         }
+
         return new string(array);
     }
 
@@ -117,11 +119,15 @@ public class WordGameBoard : MonoBehaviour
     }
 
     // Goes to the next word
-    private void NextWord() {
+    /* private void NextWord() {
         if (MatchesWord()) {
             SetRandomWord();
             SetWord();
             solved++;
         }
     }
+
+    /* private void AddSquare() {
+        squares(Instantiate(square));
+    } */
 }
