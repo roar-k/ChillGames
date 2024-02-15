@@ -22,6 +22,8 @@ public class WordGameBoard : MonoBehaviour
 
     private int solved;
 
+    private bool moving;
+
     private void Start() {
         LoadData();
         SetRandomWord();

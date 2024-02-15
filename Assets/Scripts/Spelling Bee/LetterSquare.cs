@@ -10,6 +10,8 @@ public class LetterSquare : MonoBehaviour
     
     public char letter { get; set; }
 
+    public bool moving;
+
     private void Awake() {
         text = GetComponentInChildren<TextMeshProUGUI>();
     }
@@ -19,4 +21,10 @@ public class LetterSquare : MonoBehaviour
         this.letter = letter;
         text.text = letter.ToString();
     }
+
+    /* public void AutoMove() {
+        if (moving) {
+
+        }
+    } */
 }

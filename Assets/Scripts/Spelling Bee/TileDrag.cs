@@ -9,10 +9,13 @@ public class TileDrag : MonoBehaviour
     [HideInInspector]
     public Transform parentAfterDrag;
 
+    private LetterSquare square;
+    
     private Image image;
 
     private void Start() {
         image = GetComponent<Image>();
+        square = GetComponent<LetterSquare>();
     }
 
     // Sets the object at a certain Y level so it can only move left and right
@@ -26,6 +29,7 @@ public class TileDrag : MonoBehaviour
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
+        square.moving = true;
 
         // When object begins dragging, image fades a little
         image.color = new Color32(255, 255, 255, 170);
@@ -46,6 +50,7 @@ public class TileDrag : MonoBehaviour
         // When object finishes dragging, image fades back to its normal color
         image.color = new Color(255, 255, 255, 255);
         image.raycastTarget = true;
+        square.moving = false;
     }
 
 }
