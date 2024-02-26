@@ -15,7 +15,7 @@ public class WordGameBoard : MonoBehaviour
 
     [Header("Game Objects")]
     public LetterSquare[] squares;
-    public LetterSquare square;
+    public Row[] row;
 
     [Header("Solution")]
     public string word;
@@ -112,7 +112,7 @@ public class WordGameBoard : MonoBehaviour
         for (int i = 0; i < squares.Length; i++) {
             match += squares[i].letter;
         }
-        
+        Debug.Log(match);
         if (match == word) {
             return true;
         }

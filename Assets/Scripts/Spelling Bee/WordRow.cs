@@ -26,4 +26,12 @@ public class WordRow : MonoBehaviour
         squares = GetComponentsInChildren<LetterSquare>();
     }
 
+    public string GetWord() {
+        string word = "";
+        for (int i = 0; i < squares.Length; i++) {
+            word += squares[i].letter;
+        }
+        
+        return word;
+    }
 }

@@ -59,11 +59,11 @@ public class Board : MonoBehaviour
     // Loads all the words
     private void LoadData() {
         // Loads all valid words
-        TextAsset textFile = Resources.Load("official_wordle_all") as TextAsset;
+        TextAsset textFile = Resources.Load("7-letter-words-list") as TextAsset;
         validWords = textFile.text.Split('\n');
 
         // Loads all possible solutions
-        textFile = Resources.Load("official_wordle_common") as TextAsset;
+        textFile = Resources.Load("common-7-letter-words") as TextAsset;
         solutions = textFile.text.Split('\n');
     }
 
