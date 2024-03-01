@@ -16,6 +16,8 @@ public class Board : MonoBehaviour
         KeyCode.Y, KeyCode.Z, 
     };
 
+    public GameManager_Wordle gameManager;
+
     private Row[] rows;
     
     private string[] solutions;
@@ -23,6 +25,7 @@ public class Board : MonoBehaviour
     public string word;
     private int rowIndex;
     private int columnIndex;
+    private int count;
 
     [Header("States")]
     public Tile.State emptyState;
@@ -35,6 +38,7 @@ public class Board : MonoBehaviour
     public GameObject invalidWordText;
     public Button mainMenuButton;
     public Button playAgainButton;
+    public GameObject leaderboard;
 
     private void Awake() {
         rows = GetComponentsInChildren<Row>();
@@ -43,6 +47,7 @@ public class Board : MonoBehaviour
     private void Start() {
         LoadData();
         SetRandomWord();
+        count = rowIndex;
     }
 
     public void PlayAgain() {
@@ -202,11 +207,13 @@ public class Board : MonoBehaviour
     private void OnEnable() {
         mainMenuButton.gameObject.SetActive(false);
         playAgainButton.gameObject.SetActive(false);
+        gameManager.NewGame();
     }
 
     // Main Menu and Play Again buttons appear when script is disabled
     private void OnDisable() {
         mainMenuButton.gameObject.SetActive(true);
         playAgainButton.gameObject.SetActive(true);
+        gameManager.GameOver();
     }
 }
