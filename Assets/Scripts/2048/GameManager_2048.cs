@@ -73,7 +73,7 @@ public class GameManager_2048 : MonoBehaviour
         SaveHiscore();
     }
 
-    // Sets the high score box to the high score
+    // Saves the highscore into player prefs
     private void SaveHiscore() {
         int hiscore = LoadHiscore();
 

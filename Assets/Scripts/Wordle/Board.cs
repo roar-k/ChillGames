@@ -20,12 +20,18 @@ public class Board : MonoBehaviour
 
     private Row[] rows;
     
-    private string[] solutions;
+    private string[] levelFourWords;
     private string[] validWords;
     public string word;
-    private int rowIndex;
+    public int rowIndex;
     private int columnIndex;
-    private int count;
+    public int count;
+    public int level;
+
+    [Header("Levels")]
+    public GameObject[] levelFiveTiles;
+    public GameObject[] levelSixTiles;
+    public GameObject[] levelSevenTiles;
 
     [Header("States")]
     public Tile.State emptyState;
@@ -38,16 +44,25 @@ public class Board : MonoBehaviour
     public GameObject invalidWordText;
     public Button mainMenuButton;
     public Button playAgainButton;
-    public GameObject leaderboard;
+    public Button nextLevelButton;
+    public GameObject statistics;
 
     private void Awake() {
         rows = GetComponentsInChildren<Row>();
     }
 
     private void Start() {
+        // Game starts with 4 letter words
+        level = 4;
+        
+        for (int i = 0; i < 6; i++) {
+            levelFiveTiles[i].SetActive(false);
+            levelSevenTiles[i].SetActive(false);
+            levelSixTiles[i].SetActive(false);
+        }
+
         LoadData();
         SetRandomWord();
-        count = rowIndex;
     }
 
     public void PlayAgain() {
@@ -64,18 +79,20 @@ public class Board : MonoBehaviour
     // Loads all the words
     private void LoadData() {
         // Loads all valid words
-        TextAsset textFile = Resources.Load("7-letter-words-list") as TextAsset;
+        TextAsset textFile = Resources.Load("common-4-letter-words") as TextAsset;
         validWords = textFile.text.Split('\n');
 
         // Loads all possible solutions
-        textFile = Resources.Load("common-7-letter-words") as TextAsset;
-        solutions = textFile.text.Split('\n');
+        textFile = Resources.Load("4_letter_words") as TextAsset;
+        levelFourWords = textFile.text.Split('\n');
     }
 
     // Sets a random word as the solution from the array
     private void SetRandomWord() {
-        word = solutions[Random.Range(0, solutions.Length)];
-        word = word.ToLower().Trim();
+        // if (level == 4) {
+            word = levelFourWords[Random.Range(0, levelFourWords.Length)];
+            word = word.ToLower().Trim();
+        // }
     }
 
     private void Update() {
@@ -102,7 +119,7 @@ public class Board : MonoBehaviour
             // Loop through array to check for each letter
             for (int i = 0; i < SUPPORTED_KEYS.Length; i++ ) {
                 if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
-                    // Checks to see what slot we are currently on
+                    // Sets the current slot to the key that is pressed
                     currentRow.tiles[columnIndex].SetLetter((char) SUPPORTED_KEYS[i]);
                     currentRow.tiles[columnIndex].SetState(occupiedState);
                     columnIndex++;
@@ -157,6 +174,10 @@ public class Board : MonoBehaviour
 
         // Disables script when player has won
         if (HasWon(row)) {
+            count = rowIndex;
+            level++;
+
+            nextLevelButton.gameObject.SetActive(true);
             enabled = false;
         }
 
@@ -193,7 +214,7 @@ public class Board : MonoBehaviour
     }
 
     // Checks if the player has won the game or not
-    private bool HasWon(Row row) {
+    public bool HasWon(Row row) {
         for (int i = 0; i < row.tiles.Length; i++) {
             if (row.tiles[i].state != correctState) {
                 return false;
@@ -203,10 +224,30 @@ public class Board : MonoBehaviour
         return true;
     }
 
+    // Increases the word length when word is correctly guessed
+    public void NextLevel() {
+        for (int i = 0; i < 6; i++) {
+            if (level == 4) {
+                levelFiveTiles[i].SetActive(true);
+            }
+
+            else if (level == 6) {
+               levelSixTiles[i].SetActive(true); 
+            }
+
+            else if (level == 7) {
+                levelSevenTiles[i].SetActive(true);
+            }
+        }
+
+        PlayAgain();
+    }
+
     // Main Menu and Play Again buttons disappear when script is enabled
     private void OnEnable() {
         mainMenuButton.gameObject.SetActive(false);
         playAgainButton.gameObject.SetActive(false);
+        nextLevelButton.gameObject.SetActive(false);
         gameManager.NewGame();
     }
 

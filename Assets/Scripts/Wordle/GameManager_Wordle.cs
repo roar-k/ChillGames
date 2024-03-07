@@ -6,27 +6,27 @@ using TMPro;
 public class GameManager_Wordle : MonoBehaviour
 {
     public Board board;
-    public CanvasGroup leaderboard;
+    public CanvasGroup statistics;
 
     private void Start() {
         NewGame();
     }
 
     public void NewGame() {
-        leaderboard.alpha = 0f;
-        leaderboard.interactable = false;
+        statistics.alpha = 0f;
+        statistics.interactable = false;
 
         board.enabled = true;
     }
 
     public void GameOver() {
-        leaderboard.interactable = true;
-        StartCoroutine(Fade(leaderboard, 1f, 1f));
+        statistics.interactable = true;
+        StartCoroutine(Fade(statistics, 1f, 1f));
 
         board.enabled = false;
     }
 
-    // Fading animation for Leaderboard
+    // Fading animation for statistics
     private IEnumerator Fade(CanvasGroup canvasGroup, float to, float delay) {
         yield return new WaitForSeconds(delay);
 
@@ -43,8 +43,8 @@ public class GameManager_Wordle : MonoBehaviour
         canvasGroup.alpha = to;
     }
 
-    public void CloseLeaderboard() {
-        leaderboard.interactable = false;
-        leaderboard.alpha = 0f;
+    public void CloseStatistics() {
+        statistics.interactable = false;
+        statistics.alpha = 0f;
     }
 }
