@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Spelling Bee Main Menu.unity
     guid: f942c70832ee5a1408d8a66b71de6343
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Spelling Bee.unity
     guid: 65caea271ac4bcc499291388bbee26e4
+  - enabled: 1
+    path: Assets/Scenes/2048.unity
+    guid: c4031e6b344fbb8458ce9e6db89a92ac
   m_configObjects: {}

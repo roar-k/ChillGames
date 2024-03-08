@@ -21,10 +21,14 @@ public class Board : MonoBehaviour
     private Row[] rows;
     
     private string[] levelFourWords;
+    private string[] levelFiveWords;
+    private string[] levelSixWords;
+    private string[] levelSevenWords;
     private string[] validWords;
     public string word;
-    public int rowIndex;
-    private int columnIndex;
+
+    private int rowIndex;
+    public int columnIndex;
     public int count;
     public int level;
 
@@ -49,17 +53,16 @@ public class Board : MonoBehaviour
 
     private void Awake() {
         rows = GetComponentsInChildren<Row>();
+        /* for (int i = 0; i < 6; i++) {
+            levelFiveTiles[i].gameObject.SetActive(false);
+            levelSixTiles[i].gameObject.SetActive(false);
+            levelSevenTiles[i].gameObject.SetActive(false);
+        } */
     }
 
     private void Start() {
         // Game starts with 4 letter words
         level = 4;
-        
-        for (int i = 0; i < 6; i++) {
-            levelFiveTiles[i].SetActive(false);
-            levelSevenTiles[i].SetActive(false);
-            levelSixTiles[i].SetActive(false);
-        }
 
         LoadData();
         SetRandomWord();
@@ -79,20 +82,44 @@ public class Board : MonoBehaviour
     // Loads all the words
     private void LoadData() {
         // Loads all valid words
-        TextAsset textFile = Resources.Load("common-4-letter-words") as TextAsset;
+        TextAsset textFile = Resources.Load("valid_words") as TextAsset;
         validWords = textFile.text.Split('\n');
 
         // Loads all possible solutions
         textFile = Resources.Load("4_letter_words") as TextAsset;
         levelFourWords = textFile.text.Split('\n');
+
+        textFile = Resources.Load("5_letter_words") as TextAsset;
+        levelFiveWords = textFile.text.Split('\n');
+
+        textFile = Resources.Load("6_letter_words") as TextAsset;
+        levelSixWords = textFile.text.Split('\n');
+
+        textFile = Resources.Load("7_letter_words") as TextAsset;
+        levelSevenWords = textFile.text.Split('\n');
     }
 
     // Sets a random word as the solution from the array
     private void SetRandomWord() {
-        // if (level == 4) {
+        if (level == 4) {
             word = levelFourWords[Random.Range(0, levelFourWords.Length)];
             word = word.ToLower().Trim();
-        // }
+        }
+
+        if (level == 5) {
+            word = levelFiveWords[Random.Range(0, levelFiveWords.Length)];
+            word = word.ToLower().Trim();
+        }
+
+        if (level == 6) {
+            word = levelSixWords[Random.Range(0, levelSixWords.Length)];
+            word = word.ToLower().Trim();
+        }
+
+        if (level == 7) {
+            word = levelSevenWords[Random.Range(0, levelSevenWords.Length)];
+            word = word.ToLower().Trim();
+        }
     }
 
     private void Update() {
@@ -108,7 +135,7 @@ public class Board : MonoBehaviour
             invalidWordText.gameObject.SetActive(false);
         }
 
-        // Checks to see if out of bounds, if yes, submit row
+        // Checks to see if out of bounds, if yes and return is presssed, submit row
         else if (columnIndex >= currentRow.tiles.Length) {
             if (Input.GetKeyDown(KeyCode.Return)) {
                 SubmitRow(currentRow);
@@ -175,7 +202,6 @@ public class Board : MonoBehaviour
         // Disables script when player has won
         if (HasWon(row)) {
             count = rowIndex;
-            level++;
 
             nextLevelButton.gameObject.SetActive(true);
             enabled = false;
@@ -225,21 +251,23 @@ public class Board : MonoBehaviour
     }
 
     // Increases the word length when word is correctly guessed
+    // Activates the next level tiles
     public void NextLevel() {
         for (int i = 0; i < 6; i++) {
             if (level == 4) {
-                levelFiveTiles[i].SetActive(true);
+                levelFiveTiles[i].gameObject.SetActive(true);
             }
 
-            else if (level == 6) {
-               levelSixTiles[i].SetActive(true); 
+            if (level == 5) {
+                levelSixTiles[i].gameObject.SetActive(true);
             }
 
-            else if (level == 7) {
-                levelSevenTiles[i].SetActive(true);
+            if (level == 6) {
+                levelSevenTiles[i].gameObject.SetActive(true);
             }
         }
 
+        level++;
         PlayAgain();
     }
 
