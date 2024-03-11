@@ -22,6 +22,10 @@ public class LetterSquare : MonoBehaviour
 
     private float x;
 
+    //public float gridSize = .5F;
+
+    public Vector3 targetPos;
+
     private void Start() {
         x = transform.position.x;
     }
@@ -32,7 +36,10 @@ public class LetterSquare : MonoBehaviour
 
     // Sets the object at a certain Y level so it can only move left and right
     private void Update() {
-        transform.position = new Vector3(transform.position.x, 383, transform.position.z);
+        transform.position = new Vector3(
+            Mathf.Round(targetPos.x), 
+            Mathf.Round(targetPos.y), 
+            Mathf.Round(targetPos.z));
     }
 
     // Sets the tile to that letter
@@ -84,4 +91,21 @@ public class LetterSquare : MonoBehaviour
     /*public void LockInPosition() {
 
     }*/
+    // float RoundToNearestGrid(float pos) {
+    //     float xDiff = pos % gridSize;
+    //     bool isPositive = pos > 0 ? true : false;
+    //     pos -= xDiff;
+    //     if (Mathf.Abs(xDiff) > (gridSize / 2))
+    //     {
+    //         if(isPositive)
+    //         {
+    //             pos += gridSize;
+    //         }
+    //         else
+    //         {
+    //             pos -= gridSize;
+    //         }
+    //     }
+    //     return pos;
+    // }
 }

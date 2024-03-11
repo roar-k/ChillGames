@@ -32,7 +32,7 @@ public class WordGameBoard : MonoBehaviour
     }
 
     private void Update() {
-        // MatchesWord();
+        MatchesWord();
         // NextWord();
     }
 
