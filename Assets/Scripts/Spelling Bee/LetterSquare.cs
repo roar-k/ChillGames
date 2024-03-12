@@ -34,12 +34,11 @@ public class LetterSquare : MonoBehaviour
         text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
+//transform.position.x, 383, transform.position.z
     // Sets the object at a certain Y level so it can only move left and right
     private void Update() {
-        transform.position = new Vector3(
-            Mathf.Round(targetPos.x), 
-            Mathf.Round(targetPos.y), 
-            Mathf.Round(targetPos.z));
+        //     transform.position = new Vector3(
+        //     (transform.position.x-transform.position.x%50), 383, transform.position.z);
     }
 
     // Sets the tile to that letter
@@ -62,8 +61,16 @@ public class LetterSquare : MonoBehaviour
 
     public void OnDrag(BaseEventData data) {
         PointerEventData eventData = (PointerEventData) data;
-
+        
         transform.position = Input.mousePosition;
+            if (transform.position.x >510) {
+                transform.position = new Vector3(510,383,transform.position.z);
+            } else if (transform.position.x <360) {
+                transform.position = new Vector3(360,383,transform.position.z);
+            }else {
+                transform.position = new Vector3((transform.position.x-transform.position.x%50), 383, transform.position.z);
+            }
+        
         moving = true;
     }
 
@@ -88,24 +95,7 @@ public class LetterSquare : MonoBehaviour
         Debug.Log("dropped");
     }
 
-    /*public void LockInPosition() {
+    //public void LockInPosition() {
 
-    }*/
-    // float RoundToNearestGrid(float pos) {
-    //     float xDiff = pos % gridSize;
-    //     bool isPositive = pos > 0 ? true : false;
-    //     pos -= xDiff;
-    //     if (Mathf.Abs(xDiff) > (gridSize / 2))
-    //     {
-    //         if(isPositive)
-    //         {
-    //             pos += gridSize;
-    //         }
-    //         else
-    //         {
-    //             pos -= gridSize;
-    //         }
-    //     }
-    //     return pos;
-    // }
+ 
 }
