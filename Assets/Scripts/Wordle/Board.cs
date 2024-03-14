@@ -6,7 +6,7 @@ using TMPro;
 
 // Script for the game board in Wordle, add to Board object in Wordle
 public class Board : MonoBehaviour
-{   
+{
     // Array of all the letters in the Alphabet
     private static readonly KeyCode[] SUPPORTED_KEYS = new KeyCode[] {
         KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, 
@@ -28,14 +28,9 @@ public class Board : MonoBehaviour
     public string word;
 
     private int rowIndex;
-    public int columnIndex;
+    private int columnIndex;
     public int count;
     public int level;
-
-    [Header("Levels")]
-    public GameObject[] levelFiveTiles;
-    public GameObject[] levelSixTiles;
-    public GameObject[] levelSevenTiles;
 
     [Header("States")]
     public Tile.State emptyState;
@@ -53,16 +48,11 @@ public class Board : MonoBehaviour
 
     private void Awake() {
         rows = GetComponentsInChildren<Row>();
-        /* for (int i = 0; i < 6; i++) {
-            levelFiveTiles[i].gameObject.SetActive(false);
-            levelSixTiles[i].gameObject.SetActive(false);
-            levelSevenTiles[i].gameObject.SetActive(false);
-        } */
     }
 
     private void Start() {
-        // Game starts with 4 letter words
-        level = 4;
+        // Sets the level to the number of tiles in each row
+        level = rows[0].tiles.Length;
 
         LoadData();
         SetRandomWord();
@@ -210,7 +200,7 @@ public class Board : MonoBehaviour
         rowIndex++;
         columnIndex = 0;
 
-        // Disables script when run out of columns
+        // Disables script when run out of rows
         if (rowIndex >= rows.Length) {
             enabled = false;
         }
@@ -250,25 +240,23 @@ public class Board : MonoBehaviour
         return true;
     }
 
-    // Increases the word length when word is correctly guessed
-    // Activates the next level tiles
+    // Moves on to next level by switching scenes
     public void NextLevel() {
-        for (int i = 0; i < 6; i++) {
-            if (level == 4) {
-                levelFiveTiles[i].gameObject.SetActive(true);
-            }
-
-            if (level == 5) {
-                levelSixTiles[i].gameObject.SetActive(true);
-            }
-
-            if (level == 6) {
-                levelSevenTiles[i].gameObject.SetActive(true);
-            }
+        if (level == 4) {
+           ScenesManager.Instance.LoadScene(ScenesManager.Scene.WordleLvl2);
         }
 
-        level++;
-        PlayAgain();
+        if (level == 5) {
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.WordleLvl3);
+        }
+
+        if (level == 6) {
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.WordleLvl4);
+        }
+
+        else {
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.Wordle);
+        }
     }
 
     // Main Menu and Play Again buttons disappear when script is enabled
@@ -286,3 +274,4 @@ public class Board : MonoBehaviour
         gameManager.GameOver();
     }
 }
+
