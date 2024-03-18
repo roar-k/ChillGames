@@ -15,7 +15,8 @@ public class ScenesManager : MonoBehaviour
         Wordle,
         WordleLvl2,
         WordleLvl3,
-        WordleLvl4
+        WordleLvl4,
+        WordleLvl5
     }
 
     public void LoadScene(Scene scene) {

@@ -20,10 +20,12 @@ public class Board : MonoBehaviour
 
     private Row[] rows;
     
+    [Header("Words")]
     private string[] levelFourWords;
     private string[] levelFiveWords;
     private string[] levelSixWords;
     private string[] levelSevenWords;
+    private string[] levelEightWords;
     private string[] validWords;
     public string word;
 
@@ -31,6 +33,7 @@ public class Board : MonoBehaviour
     private int columnIndex;
     public int count;
     public int level;
+    private int completedCount;
 
     [Header("States")]
     public Tile.State emptyState;
@@ -53,6 +56,7 @@ public class Board : MonoBehaviour
     private void Start() {
         // Sets the level to the number of tiles in each row
         level = rows[0].tiles.Length;
+        completedCount = 0;
 
         LoadData();
         SetRandomWord();
@@ -87,6 +91,9 @@ public class Board : MonoBehaviour
 
         textFile = Resources.Load("7_letter_words") as TextAsset;
         levelSevenWords = textFile.text.Split('\n');
+
+        textFile = Resources.Load("8_letter_words") as TextAsset;
+        levelEightWords = textFile.text.Split('\n');
     }
 
     // Sets a random word as the solution from the array
@@ -108,6 +115,11 @@ public class Board : MonoBehaviour
 
         if (level == 7) {
             word = levelSevenWords[Random.Range(0, levelSevenWords.Length)];
+            word = word.ToLower().Trim();
+        }
+
+        if (level == 8) {
+            word = levelEightWords[Random.Range(0, levelEightWords.Length)];
             word = word.ToLower().Trim();
         }
     }
@@ -193,7 +205,10 @@ public class Board : MonoBehaviour
         if (HasWon(row)) {
             count = rowIndex;
 
-            nextLevelButton.gameObject.SetActive(true);
+            if (completedCount == 1) {
+                nextLevelButton.gameObject.SetActive(true);
+            }
+            completedCount++;
             enabled = false;
         }
 
@@ -254,7 +269,11 @@ public class Board : MonoBehaviour
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.WordleLvl4);
         }
 
-        else {
+        if (level == 7) {
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.WordleLvl5);
+        }
+
+        if (level == 8) {
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.Wordle);
         }
     }

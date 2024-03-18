@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WordleLvl4.unity
     guid: 20236ec35441d4848877ae02766db185
+  - enabled: 1
+    path: Assets/Scenes/WordleLvl5.unity
+    guid: 503502add4ec97b4fb1815ec66461d5f
   m_configObjects: {}
