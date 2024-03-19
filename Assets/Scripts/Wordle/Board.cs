@@ -96,7 +96,7 @@ public class Board : MonoBehaviour
         levelEightWords = textFile.text.Split('\n');
     }
 
-    // Sets a random word as the solution from the array
+    // Sets a random word as the solution from corresponding array 
     private void SetRandomWord() {
         if (level == 4) {
             word = levelFourWords[Random.Range(0, levelFourWords.Length)];
@@ -204,10 +204,13 @@ public class Board : MonoBehaviour
         // Disables script when player has won
         if (HasWon(row)) {
             count = rowIndex;
+            gameManager.SetScore(level);
 
-            if (completedCount == 1) {
+            // Player has to solve the level twice in order to move on to next level
+            if (completedCount >= 1) {
                 nextLevelButton.gameObject.SetActive(true);
             }
+
             completedCount++;
             enabled = false;
         }
