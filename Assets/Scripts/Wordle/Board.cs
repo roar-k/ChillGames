@@ -65,6 +65,7 @@ public class Board : MonoBehaviour
     public void PlayAgain() {
         ClearBoard();
         SetRandomWord();
+        gameManager.NewGame();
 
         enabled = true;
     }
@@ -205,6 +206,7 @@ public class Board : MonoBehaviour
         if (HasWon(row)) {
             count = rowIndex;
             gameManager.SetScore(level);
+            gameManager.AddWord(word);
 
             // Player has to solve the level twice in order to move on to next level
             if (completedCount >= 1) {

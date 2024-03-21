@@ -4151,6 +4151,7 @@ MonoBehaviour:
   statistics: {fileID: 1956463878}
   currentText: {fileID: 1231982575}
   highText: {fileID: 1319218404}
+  wordListText: {fileID: 1389138796}
 --- !u!4 &1437991506
 Transform:
   m_ObjectHideFlags: 0

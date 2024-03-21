@@ -11,9 +11,10 @@ public class GameManager_Wordle : MonoBehaviour
 
     public TextMeshProUGUI currentText;
     public TextMeshProUGUI highText;
+    public TextMeshProUGUI wordListText;
 
     private int score;
-    private string words;
+    private string wordList;
 
     private void Start() {
         NewGame();
@@ -22,21 +23,22 @@ public class GameManager_Wordle : MonoBehaviour
     public void NewGame() {
         SetScore(4);
         highText.text = LoadHiscore().ToString() + " Letter Words";
+        wordListText.text = LoadWords().ToString();
 
-        statistics.enabled = true;
         statistics.alpha = 0f;
-        statistics.interactable = false;
 
         board.enabled = true;
     }
 
     public void GameOver() {
-        highText.text = LoadHiscore().ToString() + " Letter Words";
-        
-        statistics.interactable = true;
-        StartCoroutine(Fade(statistics, 1f, 1f));
-
         board.enabled = false;
+
+        highText.text = LoadHiscore().ToString() + " Letter Words";
+        wordListText.text = LoadWords().ToString();
+
+        StartCoroutine(Fade(statistics, 1f, 0.5f));
+
+        statistics.interactable = true;
     }
 
     // Fading animation for statistics
@@ -82,5 +84,26 @@ public class GameManager_Wordle : MonoBehaviour
     // Loads the player's highscore for first row guesses
     public int LoadHiscore() {
         return PlayerPrefs.GetInt("highestlevel", 0);
+    }
+
+    // Add the current solved word to the word list box
+    public void AddWord(string word) {
+        this.wordList += word + "  ";
+
+        wordListText.text = wordList.ToString();
+
+        SaveWords();
+    }
+
+    // Saves all the words in the words solved box
+    private void SaveWords() {
+        string words = LoadWords();
+
+        PlayerPrefs.SetString("words", wordList);
+    }
+
+    // Loads all the past words solved using Player Prefs
+    public string LoadWords() {
+        return PlayerPrefs.GetString("words", "No Words");
     }
 }
