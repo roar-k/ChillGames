@@ -56,6 +56,7 @@ public class Board : MonoBehaviour
     private void Start() {
         // Sets the level to the number of tiles in each row
         level = rows[0].tiles.Length;
+        gameManager.SetScore(level);
         completedCount = 0;
 
         LoadData();

@@ -8,6 +8,7 @@ public class GameManager_Wordle : MonoBehaviour
 {
     public Board board;
     public CanvasGroup statistics;
+    public CanvasGroup pauseMenu;
 
     public TextMeshProUGUI currentText;
     public TextMeshProUGUI highText;
@@ -21,11 +22,10 @@ public class GameManager_Wordle : MonoBehaviour
     }
 
     public void NewGame() {
-        SetScore(4);
         highText.text = LoadHiscore().ToString() + " Letter Words";
-        wordListText.text = LoadWords().ToString();
 
         statistics.alpha = 0f;
+        pauseMenu.alpha = 0f;
 
         board.enabled = true;
     }
@@ -58,9 +58,24 @@ public class GameManager_Wordle : MonoBehaviour
         canvasGroup.alpha = to;
     }
 
+    // Closes Statistics UI
     public void CloseStatistics() {
         statistics.interactable = false;
         statistics.alpha = 0f;
+    }
+
+    // Opens Statistics UI
+    public void OpenStatistics() {
+        if (statistics.alpha == 0f) {
+            statistics.interactable = true;
+            statistics.alpha = 1f;
+
+            ClosePauseMenu();
+        }
+
+        else {
+            CloseStatistics();
+        }
     }
 
     // Sets the score to the current store
@@ -82,7 +97,7 @@ public class GameManager_Wordle : MonoBehaviour
     }
 
     // Loads the player's highscore for first row guesses
-    public int LoadHiscore() {
+    private int LoadHiscore() {
         return PlayerPrefs.GetInt("highestlevel", 0);
     }
 
@@ -103,7 +118,28 @@ public class GameManager_Wordle : MonoBehaviour
     }
 
     // Loads all the past words solved using Player Prefs
-    public string LoadWords() {
-        return PlayerPrefs.GetString("words", "No Words");
+    private string LoadWords() {
+        return PlayerPrefs.GetString("words", wordList);
+    }
+
+    // Closes the Pause Menu
+    public void ClosePauseMenu() {
+        pauseMenu.interactable = false;
+        pauseMenu.alpha = 0f;
+    }
+
+    // Opens the Pause menu
+    public void OpenPauseMenu() {
+        // Only opens Pause menu if it is not currently opened, if not, it will close
+        if (pauseMenu.alpha == 0f) {
+            pauseMenu.interactable = true;
+            pauseMenu.alpha = 1f;
+
+            CloseStatistics();
+        }
+
+        else {
+            ClosePauseMenu();
+        }
     }
 }
