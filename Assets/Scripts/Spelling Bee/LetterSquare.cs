@@ -22,9 +22,6 @@ public class LetterSquare : MonoBehaviour
 
     private float x;
 
-    //public float gridSize = .5F;
-
-    public Vector3 targetPos;
 
     private void Start() {
         x = transform.position.x;
@@ -47,7 +44,7 @@ public class LetterSquare : MonoBehaviour
         text.text = letter.ToString();
     }
 
-    public void OnBeginDrag(BaseEventData data) {
+    /*public void OnBeginDrag(BaseEventData data) {
         PointerEventData eventData = (PointerEventData) data;
 
         parentAfterDrag = transform.parent;
@@ -58,19 +55,25 @@ public class LetterSquare : MonoBehaviour
         image.color = new Color32(255, 255, 255, 170);
         image.raycastTarget = false;
     }
-
+    
     public void OnDrag(BaseEventData data) {
         PointerEventData eventData = (PointerEventData) data;
-        
+        // float xDiff;
+        // float roundedPos;
         transform.position = Input.mousePosition;
-            if (transform.position.x >510) {
-                transform.position = new Vector3(510,383,transform.position.z);
-            } else if (transform.position.x <360) {
-                transform.position = new Vector3(360,383,transform.position.z);
-            }else {
-                transform.position = new Vector3((transform.position.x-transform.position.x%50), 383, transform.position.z);
+             if (transform.position.x >510) {
+                 transform.position = new Vector3(510,381,0);
+             } else if (transform.position.x <360) {
+                 transform.position = new Vector3(360,381,0);
+             }else {
+            //     xDiff = transform.position.x%50;
+            //     roundedPos = transform.position.x - xDiff;
+            //     if (xDiff > (50/2)) {
+            //         roundedPos += 50;
+            //     }
+                 transform.position = new Vector3(transform.position.x, 381, 0);
             }
-        
+        Debug.Log(transform.position.x);
         moving = true;
     }
 
@@ -86,6 +89,16 @@ public class LetterSquare : MonoBehaviour
 
     public void OnDrop(BaseEventData data) {
         PointerEventData eventData = (PointerEventData) data;
+        float xDiff;
+        float roundedPos;
+
+        xDiff = transform.position.x%50;
+        roundedPos = transform.position.x - xDiff;
+        if (xDiff > (50/2)) {
+            roundedPos += 50;
+        }
+        transform.position = new Vector3(roundedPos, 381, 0);
+
 
         GameObject dropped = eventData.pointerDrag;
         LetterSquare square = dropped.GetComponent<LetterSquare>();
@@ -94,7 +107,7 @@ public class LetterSquare : MonoBehaviour
 
         Debug.Log("dropped");
     }
-
+    */
     //public void LockInPosition() {
 
  

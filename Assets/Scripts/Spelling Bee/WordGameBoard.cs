@@ -6,16 +6,25 @@ using TMPro;
 
 public class WordGameBoard : MonoBehaviour
 {
+    
     [Header("Text Files")]
     public string[] threeLetterWords;
     public string[] fourLetterWords;
     public string[] fiveLetterWords;
     public string[] sixLetterWords;
     public string[] validWords;
+    private static readonly KeyCode[] SUPPORTED_KEYS = new KeyCode[] {
+        KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, 
+        KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, 
+        KeyCode.M, KeyCode.N, KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, 
+        KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, 
+        KeyCode.Y, KeyCode.Z, 
+    };
 
     [Header("Game Objects")]
     public LetterSquare[] squares;
     public Row[] row;
+    public ArrayList guess = new ArrayList();
 
     [Header("Solution")]
     public string word;
@@ -24,6 +33,7 @@ public class WordGameBoard : MonoBehaviour
 
     private bool moving;
 
+    private string temp;
     private void Start() {
         LoadData();
         SetRandomWord();
@@ -32,8 +42,14 @@ public class WordGameBoard : MonoBehaviour
     }
 
     private void Update() {
-        MatchesWord();
+        
+        guessWord();
+        
+        if (guess.Count == word.Length) {
+            MatchesWord();
+        }
         // NextWord();
+        Debug.Log(temp);
     }
 
     // Loads in all the valid words into the game from a text file
@@ -82,9 +98,9 @@ public class WordGameBoard : MonoBehaviour
     private void SetWord() {
         string scrambledWord = ScrambleWord(word);
         // Makes sure the scrambled word does not match the solution
-        //while (scrambledWord == word) {
+        while (scrambledWord == word) {
             ScrambleWord(word);
-        //}
+        }
 
         for (int i = 0; i < squares.Length; i++) {
             squares[i].SetLetter(scrambledWord[i]);
@@ -106,18 +122,26 @@ public class WordGameBoard : MonoBehaviour
         return new string(array);
     }
 
-    // Checks to see if the word matches the solution
-    private bool MatchesWord() {
-        string match = "";
-        for (int i = 0; i < squares.Length; i++) {
-            match += squares[i].letter;
+    // adds letter to word guessed
+    public void guessWord(){
+        for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
+            if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
+                guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
+                temp += ((SUPPORTED_KEYS[i].ToString()).ToLower());
+            }
         }
-        Debug.Log(match);
-        if (match == word) {
-            return true;
+        
+    }
+    public bool MatchesWord() {
+        for(int i = 0; i<word.Length; i++) {
+            if (!(guess[i].Equals(word[i]))) {
+                Debug.Log("False");
+                
+                return false;
+            }
         }
-
-        return false;
+        return true;
+        Debug.Log("True");
     }
 
     // Goes to the next word
