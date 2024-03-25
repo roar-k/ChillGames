@@ -1094,9 +1094,7 @@ Riviera
 Rosebud
 Routine
 Rowboat 
-Rugrats
 Sabbath
-Sandman
 Sarcasm
 Satisfy
 Scandal
@@ -1131,7 +1129,6 @@ Seventy
 Several
 Shelter
 Sheriff
-Sherman
 Shifter
 Shirley
 Shooter
@@ -1188,11 +1185,7 @@ Sundeck
 Sundial
 Sundown
 Sunfish
-Sunglow
 Sunlamp
-Sunland
-Sunlike
-Sunmaid
 Sunrise
 Sunroof
 Sunroom
