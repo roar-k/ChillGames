@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,6 +11,7 @@ public class WordleLeaderboard : MonoBehaviour
 {
     public string leaderboardId = "shs_wordle";
     public LeaderboardScoreView scoreViewPrefab;
+    public GameObject leaderboardDisplay;
 
     public TextMeshProUGUI messageText;
     public TMP_InputField scoreInputField;
@@ -22,27 +24,34 @@ public class WordleLeaderboard : MonoBehaviour
     }
 
     private async void Start() {
-        AuthenticationService.Instance.SignedIn += OnSignedIn;
+        /* AuthenticationService.Instance.SignedIn += OnSignedIn;
         AuthenticationService.Instance.SignInFailed += OnSignInFailed;
 
         messageText.text = "Signing in...";
 
         // Players sign in anonymously
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        await AuthenticationService.Instance.SignInAnonymouslyAsync(); */
 
         submitScoreButton.onClick.AddListener(SubmitScoreAsync);
         loadScoresButton.onClick.AddListener(LoadScoresAsync);
     }
 
+    private void Update() {
+        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
+        if (isSignedIn) {
+            leaderboardDisplay.SetActive(true);
+        }
+    }
+
     // When player signs in successfully
-    private void OnSignedIn() {
+    /* private void OnSignedIn() {
         messageText.text = $"Signed in as: {AuthenticationService.Instance.PlayerId}";
     }
 
     // When player sign in fails
     private void OnSignInFailed(RequestFailedException exception) {
         messageText.text = $"Sign in failed with exception: {exception}";
-    }
+    } */
 
     private async void SubmitScoreAsync() {
         if (string.IsNullOrEmpty(scoreInputField.text)) {
@@ -78,16 +87,19 @@ public class WordleLeaderboard : MonoBehaviour
                     leaderboardEntry.Score.ToString());
             }
 
+            // Notifies players when loading score is successfully completed
             messageText.text = "Scores fetched!";
         }
+        
+        // Notifies players when loading score fails
         catch (Exception e) {
             messageText.text = $"Failed to fetch scores: {e}";
             throw;
         }
     }
 
-    private void OnDestroy() {
+    /* private void OnDestroy() {
         AuthenticationService.Instance.SignedIn -= OnSignedIn;
         AuthenticationService.Instance.SignInFailed -= OnSignInFailed;
-    }
+    } */
 }
