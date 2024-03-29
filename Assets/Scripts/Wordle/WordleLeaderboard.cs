@@ -41,6 +41,10 @@ public class WordleLeaderboard : MonoBehaviour
         if (isSignedIn) {
             leaderboardDisplay.SetActive(true);
         }
+
+        else {
+            leaderboardDisplay.SetActive(false);
+        }
     }
 
     // When player signs in successfully
