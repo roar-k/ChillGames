@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class WordGameBoard : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class WordGameBoard : MonoBehaviour
     public LetterSquare[] squares;
     public Row[] row;
     public ArrayList guess = new ArrayList();
+    public string wordS;
+    [SerializeField] private TextMeshProUGUI guessText;
 
     [Header("Solution")]
     public string word;
@@ -42,14 +45,17 @@ public class WordGameBoard : MonoBehaviour
     }
 
     private void Update() {
-        
+        foreach(string s in guess) {
+            wordS += s;
+        }
         guessWord();
-        
+        guessText.text = wordS;
         if (guess.Count == word.Length) {
             MatchesWord();
         }
+        
         // NextWord();
-        Debug.Log(temp);
+        
     }
 
     // Loads in all the valid words into the game from a text file
@@ -124,10 +130,24 @@ public class WordGameBoard : MonoBehaviour
 
     // adds letter to word guessed
     public void guessWord(){
-        for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
-            if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
-                guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
-                temp += ((SUPPORTED_KEYS[i].ToString()).ToLower());
+        
+        if (guess.Count >0 && Input.GetKeyDown(KeyCode.Backspace)) {
+                guess.RemoveAt(guess.Count -1);
+                
+                wordS = wordS.ToString().Substring(0, wordS.Length -1);
+                
+                
+                
+                
+                
+        } else {
+            for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
+                if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
+                    guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
+                    wordS += (SUPPORTED_KEYS[i].ToString());
+                    break;
+
+                } 
             }
         }
         
@@ -135,13 +155,11 @@ public class WordGameBoard : MonoBehaviour
     public bool MatchesWord() {
         for(int i = 0; i<word.Length; i++) {
             if (!(guess[i].Equals(word[i]))) {
-                Debug.Log("False");
                 
                 return false;
             }
         }
         return true;
-        Debug.Log("True");
     }
 
     // Goes to the next word
