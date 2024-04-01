@@ -1542,8 +1542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee1f2a5baaab284e83310ed819f9465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 10.99
+  time: 10
   timerText: {fileID: 764015267}
+  timer: {fileID: 6343202763849663251}
+  redTimer: {fileID: 21300000, guid: 0e42d5b963c3da44896dc1c3e62f771c, type: 3}
 --- !u!1 &1714659783
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,6 +2179,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a8f07cf3eeec9042bc9352f5df14187, type: 3}
+--- !u!1 &6343202763849663251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8323156315888655712, guid: 6a8f07cf3eeec9042bc9352f5df14187, type: 3}
+  m_PrefabInstance: {fileID: 6343202763849663250}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
