@@ -45,12 +45,10 @@ public class WordGameBoard : MonoBehaviour
     }
 
     private void Update() {
-        foreach(string s in guess) {
-            wordS += s;
-        }
+        
         guessWord();
         guessText.text = wordS;
-        if (guess.Count == word.Length) {
+        if (guess.Count == word.Length && Input.GetKeyDown(KeyCode.Return)) {
             MatchesWord();
         }
         
@@ -140,10 +138,10 @@ public class WordGameBoard : MonoBehaviour
                 
                 
                 
-        } else {
+        } else if (guess.Count < word.Length) {
             for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
                 if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
-                    guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
+                    guess.Add((SUPPORTED_KEYS[i].ToString())/*.ToLower()*/);
                     wordS += (SUPPORTED_KEYS[i].ToString());
                     break;
 
@@ -151,14 +149,18 @@ public class WordGameBoard : MonoBehaviour
             }
         }
         
+        
     }
     public bool MatchesWord() {
+
         for(int i = 0; i<word.Length; i++) {
             if (!(guess[i].Equals(word[i]))) {
-                
+                Debug.Log("f");
+                Debug.Log(guess[i]);
                 return false;
             }
         }
+        Debug.Log("t");
         return true;
     }
 
