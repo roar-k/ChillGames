@@ -30,7 +30,7 @@ public class AuthManager : MonoBehaviour
         await UnityServices.InitializeAsync();
     }
 
-    private void Start() {
+    /* private void Start() {
         bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
         if (isSignedIn) {
             signInDisplay.SetActive(false);
@@ -42,7 +42,7 @@ public class AuthManager : MonoBehaviour
         if (!isSignedIn) {
             signInDisplay.SetActive(true);
         }
-    }
+    } */
 
     // Signs the player up based on input username/password
     public async void SignUp() {
@@ -50,6 +50,11 @@ public class AuthManager : MonoBehaviour
         string passwordText = passwordInput.text;
 
         await SignUpWithUsernamePassword(usernameText, passwordText);
+
+        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
+        if (isSignedIn) {
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.Leaderboard);
+        }
     }
 
     // Signs the player in based on input username/password
@@ -61,7 +66,7 @@ public class AuthManager : MonoBehaviour
 
         bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
         if (isSignedIn) {
-            signInDisplay.SetActive(false);
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.Leaderboard);
         }
     }
 
@@ -205,5 +210,9 @@ public class AuthManager : MonoBehaviour
         else {
             ClosePauseMenu();
         }
+    }
+
+    public void OpenChangeName() {
+        displayNameDisplay.SetActive(true);
     }
 }

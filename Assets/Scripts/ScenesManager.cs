@@ -12,6 +12,8 @@ public class ScenesManager : MonoBehaviour
     }
 
     public enum Scene {
+        SignInScreen,
+        Leaderboard,
         Wordle,
         WordleLvl2,
         WordleLvl3,

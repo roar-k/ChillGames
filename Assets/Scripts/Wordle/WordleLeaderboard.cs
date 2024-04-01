@@ -13,30 +13,29 @@ public class WordleLeaderboard : MonoBehaviour
     public LeaderboardScoreView scoreViewPrefab;
     public GameObject leaderboardDisplay;
 
+    [Header("Leaderboard UI")]
     public TextMeshProUGUI messageText;
     public TMP_InputField scoreInputField;
     public Button submitScoreButton;
     public Button loadScoresButton;
     public Transform scoresContainer;
 
+    [Header("Pause Menu")]
+    public CanvasGroup pauseMenu;
+
     private async void Awake() {
         await UnityServices.InitializeAsync();
     }
 
     private async void Start() {
-        /* AuthenticationService.Instance.SignedIn += OnSignedIn;
+        AuthenticationService.Instance.SignedIn += OnSignedIn;
         AuthenticationService.Instance.SignInFailed += OnSignInFailed;
-
-        messageText.text = "Signing in...";
-
-        // Players sign in anonymously
-        await AuthenticationService.Instance.SignInAnonymouslyAsync(); */
 
         submitScoreButton.onClick.AddListener(SubmitScoreAsync);
         loadScoresButton.onClick.AddListener(LoadScoresAsync);
     }
 
-    private void Update() {
+    /* private void Update() {
         bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
         if (isSignedIn) {
             leaderboardDisplay.SetActive(true);
@@ -45,17 +44,17 @@ public class WordleLeaderboard : MonoBehaviour
         else {
             leaderboardDisplay.SetActive(false);
         }
-    }
+    } */
 
     // When player signs in successfully
-    /* private void OnSignedIn() {
+    private void OnSignedIn() {
         messageText.text = $"Signed in as: {AuthenticationService.Instance.PlayerId}";
     }
 
     // When player sign in fails
-    private void OnSignInFailed(RequestFailedException exception) {
-        messageText.text = $"Sign in failed with exception: {exception}";
-    } */
+    private void OnSignInFailed(RequestFailedException e) {
+        messageText.text = $"Sign in failed with exception: " + e.Message;
+    }
 
     private async void SubmitScoreAsync() {
         if (string.IsNullOrEmpty(scoreInputField.text)) {
@@ -71,7 +70,7 @@ public class WordleLeaderboard : MonoBehaviour
         }
 
         catch (Exception e) {
-            messageText.text = $"Failed to submit score: {e}";
+            messageText.text = $"Failed to submit score: " + e.Message;
             throw;
         }
     }
@@ -97,13 +96,64 @@ public class WordleLeaderboard : MonoBehaviour
         
         // Notifies players when loading score fails
         catch (Exception e) {
-            messageText.text = $"Failed to fetch scores: {e}";
+            messageText.text = $"Failed to fetch scores: " + e.Message;
             throw;
         }
     }
 
-    /* private void OnDestroy() {
+        // Signs the player out
+    public async void SignOut() {
+        await SignOutOfGame();
+        ClosePauseMenu();
+    }
+
+    private async Task SignOutOfGame() {
+        try {
+            AuthenticationService.Instance.SignOut(true);
+            messageText.text = "User is Signed Out!";
+
+            
+        }
+
+        // Notifies players when signing out fails
+        catch (AuthenticationException e) {
+            messageText.text = $"Failed to sign out: " + e.Message;
+            throw;
+        }
+
+        catch (RequestFailedException e) {
+            messageText.text = $"Failed to sign out: " + e.Message;
+            throw;
+        }
+    }
+
+    private void OnDestroy() {
         AuthenticationService.Instance.SignedIn -= OnSignedIn;
         AuthenticationService.Instance.SignInFailed -= OnSignInFailed;
-    } */
+    }
+
+    // Closes the Pause Menu
+    public void ClosePauseMenu() {
+        pauseMenu.gameObject.SetActive(false);
+        pauseMenu.interactable = false;
+        pauseMenu.alpha = 0f;
+
+        leaderboardDisplay.SetActive(true);
+    }
+
+    // Opens the Pause menu
+    public void OpenPauseMenu() {
+        // Only opens Pause menu if it is not currently opened, if not, it will close
+        if (pauseMenu.alpha == 0f) {
+            leaderboardDisplay.SetActive(false);
+
+            pauseMenu.interactable = true;
+            pauseMenu.gameObject.SetActive(true);
+            pauseMenu.alpha = 1f;
+        }
+
+        else {
+            ClosePauseMenu();
+        }
+    }
 }
