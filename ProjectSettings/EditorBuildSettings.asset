@@ -6,24 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SignInScreen.unity
+    path: Assets/Scenes/Menus/SignInScreen.unity
     guid: e02309fad51d8d34989d31c85d58284d
   - enabled: 1
-    path: Assets/Scenes/Leaderboard.unity
+    path: Assets/Scenes/Menus/AccountScreen.unity
+    guid: d4c721ad1149634478b41e55ed629d21
+  - enabled: 1
+    path: Assets/Scenes/Menus/Leaderboard.unity
     guid: dc65291dc742cf24d9aa62837e23bea0
   - enabled: 1
-    path: Assets/Scenes/Wordle.unity
+    path: Assets/Scenes/Wordles/Wordle.unity
     guid: 204a9976821d1b74797087a7be778f99
   - enabled: 1
-    path: Assets/Scenes/WordleLvl2.unity
+    path: Assets/Scenes/Wordles/WordleLvl2.unity
     guid: 9a8094e22b01bd445a30ab8a3eb571a1
   - enabled: 1
-    path: Assets/Scenes/WordleLvl3.unity
+    path: Assets/Scenes/Wordles/WordleLvl3.unity
     guid: 1bacad8c87b3c4a48b73ebfe07c5b738
   - enabled: 1
-    path: Assets/Scenes/WordleLvl4.unity
+    path: Assets/Scenes/Wordles/WordleLvl4.unity
     guid: 20236ec35441d4848877ae02766db185
   - enabled: 1
-    path: Assets/Scenes/WordleLvl5.unity
+    path: Assets/Scenes/Wordles/WordleLvl5.unity
     guid: 503502add4ec97b4fb1815ec66461d5f
   m_configObjects: {}

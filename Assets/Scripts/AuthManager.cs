@@ -12,13 +12,10 @@ public class AuthManager : MonoBehaviour
 {
     [Header("Screens")]
     public GameObject signInDisplay;
-    public GameObject displayNameDisplay;
-    public CanvasGroup pauseMenu;
 
     [Header("Input")]
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
-    public TMP_InputField displayNameInput;
 
     [Header("Messages")]
     public TextMeshProUGUI messageText;
@@ -29,20 +26,6 @@ public class AuthManager : MonoBehaviour
     private async void Awake() {
         await UnityServices.InitializeAsync();
     }
-
-    /* private void Start() {
-        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
-        if (isSignedIn) {
-            signInDisplay.SetActive(false);
-        }
-    }
-
-    private void Update() {
-        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
-        if (!isSignedIn) {
-            signInDisplay.SetActive(true);
-        }
-    } */
 
     // Signs the player up based on input username/password
     public async void SignUp() {
@@ -67,35 +50,6 @@ public class AuthManager : MonoBehaviour
         bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
         if (isSignedIn) {
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.Leaderboard);
-        }
-    }
-
-    // Changes the players name based on their input
-    public async void ChangeName() {
-        string displayNameText = displayNameInput.text;
-
-        await UpdatePlayerNameAsync(displayNameText);
-    }
-
-    // Signs the player out
-    public async void SignOut() {
-        await SignOutOfGame();
-        ClosePauseMenu();
-    }
-
-    private async Task SignOutOfGame() {
-        try {
-            AuthenticationService.Instance.SignOut(true);
-            messageText.text = "User is Signed Out!";
-        }
-
-        // Notifies players when signing out fails
-        catch (AuthenticationException e) {
-            ShowErrorMessage(e.Message);
-        }
-
-        catch (RequestFailedException e) {
-            ShowErrorMessage(e.Message);
         }
     }
 
@@ -153,29 +107,12 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    // Change the players name
-    private async Task UpdatePlayerNameAsync(string playerName) {
-        try {
-            await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
-        }
-
-        // Notifies players when there is an error with changing their name
-        catch (AuthenticationException e) {
-            ShowErrorMessage(e.Message);
-        }
-
-        catch (RequestFailedException e) {
-            ShowErrorMessage(e.Message);
-        }
-    }
-
     // Shows an error message there is an error with authentication
     public void ShowErrorMessage(string message) {
         errorMessageText.text = message;
         errorMessageText.gameObject.SetActive(true);
         Invoke("HideErrorMessage", displayErrorDuration);
     }
-
 
     private void HideErrorMessage() {
         errorMessageText.gameObject.SetActive(false);
@@ -189,30 +126,5 @@ public class AuthManager : MonoBehaviour
 
     private void HideSuccessMessage() {
         messageText.gameObject.SetActive(false);
-    }
-
-    // Closes the Pause Menu
-    public void ClosePauseMenu() {
-        pauseMenu.gameObject.SetActive(false);
-        pauseMenu.interactable = false;
-        pauseMenu.alpha = 0f;
-    }
-
-    // Opens the Pause menu
-    public void OpenPauseMenu() {
-        // Only opens Pause menu if it is not currently opened, if not, it will close
-        if (pauseMenu.alpha == 0f) {
-            pauseMenu.interactable = true;
-            pauseMenu.gameObject.SetActive(true);
-            pauseMenu.alpha = 1f;
-        }
-
-        else {
-            ClosePauseMenu();
-        }
-    }
-
-    public void OpenChangeName() {
-        displayNameDisplay.SetActive(true);
     }
 }

@@ -20,31 +20,17 @@ public class WordleLeaderboard : MonoBehaviour
     public Button loadScoresButton;
     public Transform scoresContainer;
 
-    [Header("Pause Menu")]
-    public CanvasGroup pauseMenu;
-
     private async void Awake() {
         await UnityServices.InitializeAsync();
     }
 
-    private async void Start() {
+    private void Start() {
         AuthenticationService.Instance.SignedIn += OnSignedIn;
         AuthenticationService.Instance.SignInFailed += OnSignInFailed;
 
         submitScoreButton.onClick.AddListener(SubmitScoreAsync);
         loadScoresButton.onClick.AddListener(LoadScoresAsync);
     }
-
-    /* private void Update() {
-        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
-        if (isSignedIn) {
-            leaderboardDisplay.SetActive(true);
-        }
-
-        else {
-            leaderboardDisplay.SetActive(false);
-        }
-    } */
 
     // When player signs in successfully
     private void OnSignedIn() {
@@ -101,59 +87,8 @@ public class WordleLeaderboard : MonoBehaviour
         }
     }
 
-        // Signs the player out
-    public async void SignOut() {
-        await SignOutOfGame();
-        ClosePauseMenu();
-    }
-
-    private async Task SignOutOfGame() {
-        try {
-            AuthenticationService.Instance.SignOut(true);
-            messageText.text = "User is Signed Out!";
-
-            
-        }
-
-        // Notifies players when signing out fails
-        catch (AuthenticationException e) {
-            messageText.text = $"Failed to sign out: " + e.Message;
-            throw;
-        }
-
-        catch (RequestFailedException e) {
-            messageText.text = $"Failed to sign out: " + e.Message;
-            throw;
-        }
-    }
-
     private void OnDestroy() {
         AuthenticationService.Instance.SignedIn -= OnSignedIn;
         AuthenticationService.Instance.SignInFailed -= OnSignInFailed;
-    }
-
-    // Closes the Pause Menu
-    public void ClosePauseMenu() {
-        pauseMenu.gameObject.SetActive(false);
-        pauseMenu.interactable = false;
-        pauseMenu.alpha = 0f;
-
-        leaderboardDisplay.SetActive(true);
-    }
-
-    // Opens the Pause menu
-    public void OpenPauseMenu() {
-        // Only opens Pause menu if it is not currently opened, if not, it will close
-        if (pauseMenu.alpha == 0f) {
-            leaderboardDisplay.SetActive(false);
-
-            pauseMenu.interactable = true;
-            pauseMenu.gameObject.SetActive(true);
-            pauseMenu.alpha = 1f;
-        }
-
-        else {
-            ClosePauseMenu();
-        }
     }
 }
