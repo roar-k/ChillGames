@@ -47,9 +47,16 @@ public class WordGameBoard : MonoBehaviour
     private void Update() {
         
         guessWord();
+        //displays guess
         guessText.text = wordS;
+        //checks if guess is appropriate length before checking for match
         if (guess.Count == word.Length && Input.GetKeyDown(KeyCode.Return)) {
-            MatchesWord();
+            if (MatchesWord()){
+                NextWord();
+                //clears previous guess
+                
+                Debug.Log(solved);
+            }
         }
         
         // NextWord();
@@ -126,9 +133,9 @@ public class WordGameBoard : MonoBehaviour
         return new string(array);
     }
 
-    // adds letter to word guessed
+    
     public void guessWord(){
-        
+        //removing letters
         if (guess.Count >0 && Input.GetKeyDown(KeyCode.Backspace)) {
                 guess.RemoveAt(guess.Count -1);
                 
@@ -137,11 +144,11 @@ public class WordGameBoard : MonoBehaviour
                 
                 
                 
-                
+        //adding letters                
         } else if (guess.Count < word.Length) {
             for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
                 if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
-                    guess.Add((SUPPORTED_KEYS[i].ToString())/*.ToLower()*/);
+                    guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
                     wordS += (SUPPORTED_KEYS[i].ToString());
                     break;
 
@@ -152,25 +159,24 @@ public class WordGameBoard : MonoBehaviour
         
     }
     public bool MatchesWord() {
-
+        //complares letter by letter
         for(int i = 0; i<word.Length; i++) {
-            if (!(guess[i].Equals(word[i]))) {
-                Debug.Log("f");
-                Debug.Log(guess[i]);
+            if (!(guess[i].ToString().Equals(word[i].ToString()))) {
                 return false;
             }
         }
-        Debug.Log("t");
+        
         return true;
     }
 
     // Goes to the next word
-    /* private void NextWord() {
-        if (MatchesWord()) {
+    private void NextWord() {
+            wordS = "";
+            guess.Clear();
             SetRandomWord();
             SetWord();
             solved++;
-        }
+        
     }
 
     /* private void AddSquare() {
