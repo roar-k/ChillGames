@@ -23,8 +23,10 @@ public class WordGameBoard : MonoBehaviour
     };
 
     [Header("Game Objects")]
-    public LetterSquare[] squares;
+    //public LetterSquare[] squares;
     public Row[] row;
+    public TextMeshProUGUI scrambledText;
+    private string scrambledS;
     public ArrayList guess = new ArrayList();
     public string wordS;
     [SerializeField] private TextMeshProUGUI guessText;
@@ -36,7 +38,6 @@ public class WordGameBoard : MonoBehaviour
 
     private bool moving;
 
-    private string temp;
     private void Start() {
         LoadData();
         SetRandomWord();
@@ -48,12 +49,12 @@ public class WordGameBoard : MonoBehaviour
         
         guessWord();
         //displays guess
+        scrambledText.text = scrambledS.ToUpper();
         guessText.text = wordS;
         //checks if guess is appropriate length before checking for match
         if (guess.Count == word.Length && Input.GetKeyDown(KeyCode.Return)) {
             if (MatchesWord()){
                 NextWord();
-                //clears previous guess
                 
                 Debug.Log(solved);
             }
@@ -113,8 +114,9 @@ public class WordGameBoard : MonoBehaviour
             ScrambleWord(word);
         }
 
-        for (int i = 0; i < squares.Length; i++) {
-            squares[i].SetLetter(scrambledWord[i]);
+        for (int i = 0; i < word.Length; i++) {
+            //squares[i].SetLetter(scrambledWord[i]);
+            scrambledS += scrambledWord[i];
         }
     }
 
@@ -172,6 +174,7 @@ public class WordGameBoard : MonoBehaviour
     // Goes to the next word
     private void NextWord() {
             wordS = "";
+            scrambledS = "";
             guess.Clear();
             SetRandomWord();
             SetWord();
