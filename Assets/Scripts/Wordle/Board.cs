@@ -50,7 +50,6 @@ public class Board : MonoBehaviour
     public Button mainMenuButton;
     public Button playAgainButton;
     public Button nextLevelButton;
-    public GameObject statistics;
 
     private async void Awake() {
         rows = GetComponentsInChildren<Row>();
@@ -213,9 +212,10 @@ public class Board : MonoBehaviour
             count = rowIndex;
             gameManager.SetScore(level);
             gameManager.AddWord(word);
+            gameManager.SubmitScore("shs_wordle", level);
 
             // Player has to solve the level twice in order to move on to next level
-            if (completedCount >= 1) {
+            if (completedCount >= 0) {
                 nextLevelButton.gameObject.SetActive(true);
             }
 

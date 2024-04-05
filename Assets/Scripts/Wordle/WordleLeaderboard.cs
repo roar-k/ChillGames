@@ -87,6 +87,10 @@ public class WordleLeaderboard : MonoBehaviour
         }
     }
 
+    public void PlayWordle() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.Wordle);
+    }
+
     private void OnDestroy() {
         AuthenticationService.Instance.SignedIn -= OnSignedIn;
         AuthenticationService.Instance.SignInFailed -= OnSignInFailed;

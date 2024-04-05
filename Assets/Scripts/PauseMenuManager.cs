@@ -10,7 +10,7 @@ using Unity.Services.Authentication;
 public class PauseMenuManager : MonoBehaviour
 {
     public CanvasGroup pauseMenu;
-    public GameObject display;
+    public CanvasGroup display;
 
     private async void Awake() {
         await UnityServices.InitializeAsync();
@@ -22,14 +22,14 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenu.interactable = false;
         pauseMenu.alpha = 0f;
 
-        display.SetActive(true);
+        display.alpha = 1f;
     }
 
     // Opens the Pause menu
     public void OpenPauseMenu() {
         // Only opens Pause menu if it is not currently opened, if not, it will close
         if (pauseMenu.alpha == 0f) {
-            display.SetActive(false);
+            display.alpha = 0f;
 
             pauseMenu.interactable = true;
             pauseMenu.gameObject.SetActive(true);
@@ -72,7 +72,7 @@ public class PauseMenuManager : MonoBehaviour
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.AccountScreen);
     }
 
-    public void GoBack() {
+    public void OpenLeaderboard() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.Leaderboard);
     }
 
