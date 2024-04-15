@@ -6,8 +6,10 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public float timer = 10;
+    public SpriteRenderer sr;
+    public float time = 10;
     public TextMeshProUGUI timerText;
+    public Sprite redTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +19,18 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        
-        
-        if (timer < 1) {
-            timer = 0;
+        time -= Time.deltaTime;
+
+        while (time < 4) {
+            sr = gameObject.GetComponent<SpriteRenderer>();
+            
+            if (time < 1) {
+            time = 0;
         }
-        timerText.text = ((int)timer).ToString();
+        timerText.text = ((int)time).ToString();
+        }
+        
+        
     }
 
     public void TimeUp () {
