@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Services.Core;
+using Unity.Services.Leaderboards;
+using Unity.Services.Authentication;
 
 // Script for the game board in Wordle, add to Board object in Wordle
 public class Board : MonoBehaviour
@@ -47,10 +50,11 @@ public class Board : MonoBehaviour
     public Button mainMenuButton;
     public Button playAgainButton;
     public Button nextLevelButton;
-    public GameObject statistics;
 
-    private void Awake() {
+    private async void Awake() {
         rows = GetComponentsInChildren<Row>();
+
+        await UnityServices.InitializeAsync();
     }
 
     private void Start() {
@@ -208,9 +212,10 @@ public class Board : MonoBehaviour
             count = rowIndex;
             gameManager.SetScore(level);
             gameManager.AddWord(word);
+            gameManager.SubmitScore("shs_wordle", level);
 
             // Player has to solve the level twice in order to move on to next level
-            if (completedCount >= 1) {
+            if (completedCount >= 0) {
                 nextLevelButton.gameObject.SetActive(true);
             }
 
