@@ -8,6 +8,8 @@ using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Authentication;
 
+// Script for handling UI and changing name in "AccountScreen" scene
+
 public class AccountManager : MonoBehaviour
 {
     [Header("Input")]

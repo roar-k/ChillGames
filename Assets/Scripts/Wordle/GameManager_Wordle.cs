@@ -33,6 +33,7 @@ public class GameManager_Wordle : MonoBehaviour
 
     public void NewGame() {
         highText.text = LoadHiscore().ToString() + " Letter Words";
+        wordListText.text = "";
 
         statistics.alpha = 0f;
 

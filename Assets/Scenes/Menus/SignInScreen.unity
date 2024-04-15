@@ -298,7 +298,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1042104448}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: SignOutOfGame
+        m_MethodName: SignOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

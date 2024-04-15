@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Load Score
+  m_text: Load Scores
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d70fe7533d14b384697b61e534ce0e0c, type: 2}
   m_sharedMaterial: {fileID: -6408258231214114417, guid: d70fe7533d14b384697b61e534ce0e0c, type: 2}
@@ -2115,7 +2115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &809535443
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3236,7 +3236,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1744801164}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: SignOutOfGame
+        m_MethodName: SignOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3716,7 +3716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1244995681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5203,9 +5203,9 @@ RectTransform:
   - {fileID: 404880418}
   m_Father: {fileID: 27165273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 30, y: -429.8458}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -135, y: -479.8458}
   m_SizeDelta: {x: 270, y: 60}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1542484667
@@ -6016,10 +6016,7 @@ MonoBehaviour:
   leaderboardId: shs_wordle
   scoreViewPrefab: {fileID: 2091429896}
   leaderboardDisplay: {fileID: 1845979857}
-  gameManager: {fileID: 0}
   messageText: {fileID: 1202673045}
-  scoreInputField: {fileID: 1244995682}
-  submitScoreButton: {fileID: 809535444}
   loadScoresButton: {fileID: 1542484667}
   scoresContainer: {fileID: 156874518}
 --- !u!4 &1833834061

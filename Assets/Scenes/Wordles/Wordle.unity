@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Words Solved:'
+  m_text: 'Words Solved This Level:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d70fe7533d14b384697b61e534ce0e0c, type: 2}
   m_sharedMaterial: {fileID: -6408258231214114417, guid: d70fe7533d14b384697b61e534ce0e0c, type: 2}
@@ -3226,6 +3226,7 @@ MonoBehaviour:
   currentText: {fileID: 497068612}
   highText: {fileID: 1151339420}
   wordListText: {fileID: 162279654}
+  score: 0
 --- !u!4 &986976458
 Transform:
   m_ObjectHideFlags: 0

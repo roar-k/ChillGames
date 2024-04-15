@@ -7,6 +7,8 @@ using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Authentication;
 
+// Script for handling the Pause Menu popup and all the buttons in contains
+
 public class PauseMenuManager : MonoBehaviour
 {
     public CanvasGroup pauseMenu;
@@ -42,8 +44,8 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     // Signs the player out
-    public async void SignOutOfGame() {
-        await SignOut();
+    public async void SignOut() {
+        await SignOutOfGame();
 
         bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
         if (!isSignedIn) {
@@ -51,9 +53,10 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
-    private async Task SignOut() {
+    private async Task SignOutOfGame() {
         try {
             AuthenticationService.Instance.SignOut(true);
+            Debug.Log("User is Signed Out");
         }
 
         // Catches errors

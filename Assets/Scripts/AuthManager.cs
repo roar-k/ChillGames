@@ -8,6 +8,8 @@ using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Authentication;
 
+// Script for handling the UI and signing up/ signing in in the "SignInScreen" scene
+
 public class AuthManager : MonoBehaviour
 {
     [Header("Screens")]

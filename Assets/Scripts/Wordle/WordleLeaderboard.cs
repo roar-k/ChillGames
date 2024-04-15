@@ -15,8 +15,8 @@ public class WordleLeaderboard : MonoBehaviour
 
     [Header("Leaderboard UI")]
     public TextMeshProUGUI messageText;
-    public TMP_InputField scoreInputField;
-    public Button submitScoreButton;
+    // public TMP_InputField scoreInputField;
+    // public Button submitScoreButton;
     public Button loadScoresButton;
     public Transform scoresContainer;
 
@@ -28,7 +28,7 @@ public class WordleLeaderboard : MonoBehaviour
         AuthenticationService.Instance.SignedIn += OnSignedIn;
         AuthenticationService.Instance.SignInFailed += OnSignInFailed;
 
-        submitScoreButton.onClick.AddListener(SubmitScoreAsync);
+        // submitScoreButton.onClick.AddListener(SubmitScoreAsync);
         loadScoresButton.onClick.AddListener(LoadScoresAsync);
     }
 
@@ -42,7 +42,7 @@ public class WordleLeaderboard : MonoBehaviour
         messageText.text = $"Sign in failed with exception: " + e.Message;
     }
 
-    private async void SubmitScoreAsync() {
+    /* private async void SubmitScoreAsync() {
         if (string.IsNullOrEmpty(scoreInputField.text)) {
             return;
         }
@@ -59,7 +59,7 @@ public class WordleLeaderboard : MonoBehaviour
             messageText.text = $"Failed to submit score: " + e.Message;
             throw;
         }
-    }
+    } */
 
     private async void LoadScoresAsync() {
         try {
