@@ -13,6 +13,7 @@ public class ScenesManager : MonoBehaviour
 
     public enum Scene {
         SignInScreen,
+        MainMenu,
         AccountScreen,
         WordleLeaderboard,
         DinoLeaderboard,

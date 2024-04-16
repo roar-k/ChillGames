@@ -71,6 +71,10 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
+    public void OpenMainMenu() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+    }
+
     public void OpenAccount() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.AccountScreen);
     }

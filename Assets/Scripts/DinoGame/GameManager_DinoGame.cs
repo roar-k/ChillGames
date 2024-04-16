@@ -20,13 +20,17 @@ public class GameManager_DinoGame : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hiscoreText;
     public Button retryButton;
+    public Button mainMenu;
 
     private DinoPlayer player;
     private Spawner spawner;
+    private PauseMenuManager pauseMenu;
 
     private float score;
 
-    private void Awake() {
+    private async void Awake() {
+        await UnityServices.InitializeAsync();
+
         if (Instance == null) {
             Instance = this;
         }
