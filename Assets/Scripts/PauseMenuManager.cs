@@ -76,7 +76,7 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     public void OpenLeaderboard() {
-        ScenesManager.Instance.LoadScene(ScenesManager.Scene.Leaderboard);
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.WordleLeaderboard);
     }
 
 }

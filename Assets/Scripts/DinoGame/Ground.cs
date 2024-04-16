@@ -11,6 +11,7 @@ public class Ground : MonoBehaviour
     }
 
     private void Update() {
+        // Makes the ground constantly retile so that it seems like it is constantly moving
         float speed = GameManager_DinoGame.Instance.gameSpeed / transform.localScale.x;
         meshRenderer.material.mainTextureOffset += Vector2.right * speed * Time.deltaTime;
     }

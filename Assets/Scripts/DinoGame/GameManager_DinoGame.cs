@@ -1,7 +1,13 @@
+using System.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Services.Core;
+using Unity.Services.Leaderboards;
+using Unity.Services.Authentication;
 
+// Script to handle scores and starting a new game and game over
 public class GameManager_DinoGame : MonoBehaviour
 {
     public static GameManager_DinoGame Instance { get; private set; }
@@ -89,9 +95,25 @@ public class GameManager_DinoGame : MonoBehaviour
         if (score > hiscore) {
             hiscore = score;
             PlayerPrefs.SetFloat("hiscore", hiscore);
+            SubmitScore("shs_dino", hiscore);
         }
 
         hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
+    }
+
+    public async void SubmitScore(string leaderboardId, float score) {
+        await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
+    }
+
+    private async Task AddPlayerScoreAsync(string leaderboardId, float score) {
+        try {
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
+        }
+
+        catch (Exception e) {
+            Debug.Log(e.Message);
+            throw;
+        }
     }
 }
 

@@ -14,12 +14,14 @@ public class ScenesManager : MonoBehaviour
     public enum Scene {
         SignInScreen,
         AccountScreen,
-        Leaderboard,
+        WordleLeaderboard,
+        DinoLeaderboard,
         Wordle,
         WordleLvl2,
         WordleLvl3,
         WordleLvl4,
-        WordleLvl5
+        WordleLvl5,
+        DinoGame
     }
 
     public void LoadScene(Scene scene) {
