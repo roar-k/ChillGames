@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class WordGameBoard : MonoBehaviour
 {
+    
     [Header("Text Files")]
     public string[] threeLetterWords;
     public string[] fourLetterWords;
     public string[] fiveLetterWords;
     public string[] sixLetterWords;
     public string[] validWords;
+    private static readonly KeyCode[] SUPPORTED_KEYS = new KeyCode[] {
+        KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, 
+        KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, 
+        KeyCode.M, KeyCode.N, KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, 
+        KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, 
+        KeyCode.Y, KeyCode.Z, 
+    };
 
     [Header("Game Objects")]
     public LetterSquare[] squares;
     public Row[] row;
+    public ArrayList guess = new ArrayList();
+    public string wordS;
+    [SerializeField] private TextMeshProUGUI guessText;
 
     [Header("Solution")]
     public string word;
@@ -24,6 +36,7 @@ public class WordGameBoard : MonoBehaviour
 
     private bool moving;
 
+    private string temp;
     private void Start() {
         LoadData();
         SetRandomWord();
@@ -32,8 +45,17 @@ public class WordGameBoard : MonoBehaviour
     }
 
     private void Update() {
-        // MatchesWord();
+        foreach(string s in guess) {
+            wordS += s;
+        }
+        guessWord();
+        guessText.text = wordS;
+        if (guess.Count == word.Length) {
+            MatchesWord();
+        }
+        
         // NextWord();
+        
     }
 
     // Loads in all the valid words into the game from a text file
@@ -106,18 +128,38 @@ public class WordGameBoard : MonoBehaviour
         return new string(array);
     }
 
-    // Checks to see if the word matches the solution
-    private bool MatchesWord() {
-        string match = "";
-        for (int i = 0; i < squares.Length; i++) {
-            match += squares[i].letter;
-        }
-        Debug.Log(match);
-        if (match == word) {
-            return true;
-        }
+    // adds letter to word guessed
+    public void guessWord(){
+        
+        if (guess.Count >0 && Input.GetKeyDown(KeyCode.Backspace)) {
+                guess.RemoveAt(guess.Count -1);
+                
+                wordS = wordS.ToString().Substring(0, wordS.Length -1);
+                
+                
+                
+                
+                
+        } else {
+            for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
+                if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
+                    guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
+                    wordS += (SUPPORTED_KEYS[i].ToString());
+                    break;
 
-        return false;
+                } 
+            }
+        }
+        
+    }
+    public bool MatchesWord() {
+        for(int i = 0; i<word.Length; i++) {
+            if (!(guess[i].Equals(word[i]))) {
+                
+                return false;
+            }
+        }
+        return true;
     }
 
     // Goes to the next word

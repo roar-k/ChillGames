@@ -1,31 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Services.Core;
+using Unity.Services.Leaderboards;
+using Unity.Services.Authentication;
 
 public class GameManager_Wordle : MonoBehaviour
 {
+    private WordleLeaderboard leaderboard;
+
     public Board board;
     public CanvasGroup statistics;
-    public CanvasGroup pauseMenu;
 
     public TextMeshProUGUI currentText;
     public TextMeshProUGUI highText;
     public TextMeshProUGUI wordListText;
 
-    private int score;
+    public int score;
     private string wordList;
 
     private void Start() {
         NewGame();
     }
 
+    private async void Awake() {
+        await UnityServices.InitializeAsync();
+    }
+
     public void NewGame() {
         highText.text = LoadHiscore().ToString() + " Letter Words";
+        wordListText.text = "";
 
         statistics.alpha = 0f;
-        pauseMenu.alpha = 0f;
 
         board.enabled = true;
     }
@@ -69,8 +79,6 @@ public class GameManager_Wordle : MonoBehaviour
         if (statistics.alpha == 0f) {
             statistics.interactable = true;
             statistics.alpha = 1f;
-
-            ClosePauseMenu();
         }
 
         else {
@@ -122,24 +130,19 @@ public class GameManager_Wordle : MonoBehaviour
         return PlayerPrefs.GetString("words", wordList);
     }
 
-    // Closes the Pause Menu
-    public void ClosePauseMenu() {
-        pauseMenu.interactable = false;
-        pauseMenu.alpha = 0f;
+    // Submits the current level to the leaderboard
+    public async void SubmitScore(string leaderboardId, double score) {
+        await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
     }
 
-    // Opens the Pause menu
-    public void OpenPauseMenu() {
-        // Only opens Pause menu if it is not currently opened, if not, it will close
-        if (pauseMenu.alpha == 0f) {
-            pauseMenu.interactable = true;
-            pauseMenu.alpha = 1f;
-
-            CloseStatistics();
+    private async Task AddPlayerScoreAsync(string leaderboardId, double score) {
+        try {
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
         }
 
-        else {
-            ClosePauseMenu();
+        catch (Exception e) {
+            Debug.Log(e.Message);
+            throw;
         }
     }
 }
