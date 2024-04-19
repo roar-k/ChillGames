@@ -24,7 +24,6 @@ public class GameManager_DinoGame : MonoBehaviour
 
     private DinoPlayer player;
     private Spawner spawner;
-    private PauseMenuManager pauseMenu;
 
     private float score;
 
@@ -65,11 +64,14 @@ public class GameManager_DinoGame : MonoBehaviour
         gameSpeed = initialGameSpeed;
         enabled = true;
 
+        // Turns on the player and object spawner when game starts
         player.gameObject.SetActive(true);
         spawner.gameObject.SetActive(true);
 
+        // Turns off the game over text and all buttons when game starts
         gameOverText.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
 
         UpdateHiscore();
     }
@@ -78,11 +80,14 @@ public class GameManager_DinoGame : MonoBehaviour
         gameSpeed = 0f;
         enabled = false;
 
+        // Turns off the player and the object spawner when game is over
         player.gameObject.SetActive(false);
         spawner.gameObject.SetActive(false);
 
+        // Turns on game over text and all buttons when game is over
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
+        mainMenu.gameObject.SetActive(true);
 
         UpdateHiscore();
     }
@@ -95,11 +100,12 @@ public class GameManager_DinoGame : MonoBehaviour
 
     private void UpdateHiscore() {
         float hiscore = PlayerPrefs.GetFloat("hiscore", 0);
+        int lbscore = (int) hiscore;
 
         if (score > hiscore) {
             hiscore = score;
             PlayerPrefs.SetFloat("hiscore", hiscore);
-            SubmitScore("shs_dino", hiscore);
+            SubmitScore("shs_dino", lbscore);
         }
 
         hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");

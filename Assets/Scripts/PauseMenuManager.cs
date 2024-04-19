@@ -79,8 +79,12 @@ public class PauseMenuManager : MonoBehaviour
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.AccountScreen);
     }
 
-    public void OpenLeaderboard() {
+    public void OpenWordleLeaderboard() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.WordleLeaderboard);
+    }
+
+    public void OpenDinoLeaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.DinoLeaderboard);
     }
 
 }
