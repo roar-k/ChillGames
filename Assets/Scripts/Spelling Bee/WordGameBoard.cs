@@ -30,6 +30,8 @@ public class WordGameBoard : MonoBehaviour
     public ArrayList guess = new ArrayList();
     public string wordS;
     [SerializeField] private TextMeshProUGUI guessText;
+    private float time = 10;
+    public TextMeshProUGUI timerText;
 
     [Header("Solution")]
     public string word;
@@ -46,6 +48,11 @@ public class WordGameBoard : MonoBehaviour
     }
 
     private void Update() {
+        time -= Time.deltaTime;
+        timerText.text = ((int)time).ToString();
+        if (time< 0) {
+            time = 0;
+        }
         
         guessWord();
         //displays guess
@@ -85,22 +92,22 @@ public class WordGameBoard : MonoBehaviour
     // Sets the solution to a random word in the valid words list
     private void SetRandomWord() {
         // Gives a 3 letter word to solve until you have solved 5
-        if (solved < 5) {
+        if (solved < 4) {
             word = threeLetterWords[Random.Range(0, threeLetterWords.Length)];
             word = word.ToLower().Trim();
         }
         // Gives a 4 letter word to solve once you have solved five 3 letter words
-        else if (solved < 10) {
+        else if (solved < 9) {
             word = fourLetterWords[Random.Range(0, fourLetterWords.Length)];
             word = word.ToLower().Trim();
         }
         // Gives a 5 letter word to solve once you have solved five 4 letter words
-        else if (solved < 15) {
+        else if (solved < 14) {
             word = fiveLetterWords[Random.Range(0, fiveLetterWords.Length)];
             word = word.ToLower().Trim();
         }
 
-        else if (solved < 20) {
+        else {
             word = sixLetterWords[Random.Range(0, sixLetterWords.Length)];
             word = word.ToLower().Trim();
         }
@@ -179,7 +186,7 @@ public class WordGameBoard : MonoBehaviour
             SetRandomWord();
             SetWord();
             solved++;
-        
+            time = 10;
     }
 
     /* private void AddSquare() {
