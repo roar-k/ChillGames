@@ -30,8 +30,9 @@ public class WordGameBoard : MonoBehaviour
     public ArrayList guess = new ArrayList();
     public string wordS;
     [SerializeField] private TextMeshProUGUI guessText;
-    private float time = 10;
+    private float t = 11.0f;
     public TextMeshProUGUI timerText;
+    public GameObject endScreen;
 
     [Header("Solution")]
     public string word;
@@ -48,13 +49,14 @@ public class WordGameBoard : MonoBehaviour
     }
 
     private void Update() {
-        time -= Time.deltaTime;
-        timerText.text = ((int)time).ToString();
-        if (time< 0) {
-            time = 0;
+        t -= Time.deltaTime;
+        timerText.text = ((int)t).ToString();
+        if (t< 1) {
+            t = 0;
         }
         
         guessWord();
+        
         //displays guess
         scrambledText.text = scrambledS.ToUpper();
         guessText.text = wordS;
@@ -144,28 +146,29 @@ public class WordGameBoard : MonoBehaviour
 
     
     public void guessWord(){
-        //removing letters
-        if (guess.Count >0 && Input.GetKeyDown(KeyCode.Backspace)) {
-                guess.RemoveAt(guess.Count -1);
-                
-                wordS = wordS.ToString().Substring(0, wordS.Length -1);
-                
-                
-                
-                
-        //adding letters                
-        } else if (guess.Count < word.Length) {
-            for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
-                if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
-                    guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
-                    wordS += (SUPPORTED_KEYS[i].ToString());
-                    break;
+        if (t !=0) {
+            //removing letters
+            if (guess.Count >0 && Input.GetKeyDown(KeyCode.Backspace)) {
+                    guess.RemoveAt(guess.Count -1);
+                    
+                    wordS = wordS.ToString().Substring(0, wordS.Length -1);
+                    
+                    
+                    
+                    
+            //adding letters                
+            } else if (guess.Count < word.Length) {
+                for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
+                    if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
+                        guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
+                        wordS += (SUPPORTED_KEYS[i].ToString());
+                        break;
 
-                } 
+                    } 
+                }
             }
+            
         }
-        
-        
     }
     public bool MatchesWord() {
         //complares letter by letter
@@ -179,14 +182,21 @@ public class WordGameBoard : MonoBehaviour
     }
 
     // Goes to the next word
-    private void NextWord() {
+    public void NextWord() {
             wordS = "";
             scrambledS = "";
             guess.Clear();
             SetRandomWord();
             SetWord();
             solved++;
-            time = 10;
+            t = 11.0f;
+    }
+
+    public void TimeUp() {
+        if (t == 0) {
+            Time.timeScale = 0;
+            
+        }
     }
 
     /* private void AddSquare() {
