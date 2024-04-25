@@ -1,6 +1,7 @@
-using UnityEngine;
+/* using UnityEngine;
 using UnityEditor;
- 
+
+// Script used to delete all player prefs, uncomment when want to use
 public class DeletePlayerPrefsScript : EditorWindow
 {
     [MenuItem("Window/Delete PlayerPrefs (All)")]
@@ -8,4 +9,4 @@ public class DeletePlayerPrefsScript : EditorWindow
     {
         PlayerPrefs.DeleteAll();
     }
-}
+} */
