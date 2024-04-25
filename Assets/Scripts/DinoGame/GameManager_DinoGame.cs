@@ -77,6 +77,7 @@ public class GameManager_DinoGame : MonoBehaviour
     }
 
     public void GameOver() {
+        UpdateHiscore();
         gameSpeed = 0f;
         enabled = false;
 
@@ -88,8 +89,6 @@ public class GameManager_DinoGame : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(true);
-
-        UpdateHiscore();
     }
 
     private void Update() {
@@ -100,7 +99,8 @@ public class GameManager_DinoGame : MonoBehaviour
 
     private void UpdateHiscore() {
         float hiscore = PlayerPrefs.GetFloat("hiscore", 0);
-        int lbscore = (int) hiscore;
+        int lbscore = Mathf.FloorToInt(hiscore);
+        SubmitScore("shs_dino", lbscore);
 
         if (score > hiscore) {
             hiscore = score;
