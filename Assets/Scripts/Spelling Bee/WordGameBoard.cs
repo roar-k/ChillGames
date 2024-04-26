@@ -7,6 +7,7 @@ using System.Linq;
 
 public class WordGameBoard : MonoBehaviour
 {
+    public GameManager_Bee gameManager;
     
     [Header("Text Files")]
     public string[] threeLetterWords;
@@ -14,6 +15,7 @@ public class WordGameBoard : MonoBehaviour
     public string[] fiveLetterWords;
     public string[] sixLetterWords;
     public string[] validWords;
+
     private static readonly KeyCode[] SUPPORTED_KEYS = new KeyCode[] {
         KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, 
         KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, 
@@ -23,8 +25,6 @@ public class WordGameBoard : MonoBehaviour
     };
 
     [Header("Game Objects")]
-    //public LetterSquare[] squares;
-    public Row[] row;
     public TextMeshProUGUI scrambledText;
     private string scrambledS;
     public ArrayList guess = new ArrayList();
@@ -193,6 +193,7 @@ public class WordGameBoard : MonoBehaviour
             SetWord();
             solved++;
             t = 11.0f;
+            gameManager.SubmitScore("shs_bee", solved);
     }
 
     public void TimeUp() {
@@ -201,8 +202,4 @@ public class WordGameBoard : MonoBehaviour
             
         }
     }
-
-    /* private void AddSquare() {
-        squares(Instantiate(square));
-    } */
 }

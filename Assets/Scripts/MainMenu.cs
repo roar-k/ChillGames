@@ -15,4 +15,8 @@ public class MainMenu : MonoBehaviour
     public void PlayDino() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.DinoGame);
     }
+
+    public void PlayBee() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.SpellingBee);
+    }
 }
