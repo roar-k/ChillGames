@@ -37,7 +37,7 @@ public class WordGameBoard : MonoBehaviour
     [Header("Solution")]
     public string word;
 
-    private int solved;
+    public int solved;
 
     private bool moving;
 
@@ -63,9 +63,10 @@ public class WordGameBoard : MonoBehaviour
         //checks if guess is appropriate length before checking for match
         if (guess.Count == word.Length && Input.GetKeyDown(KeyCode.Return)) {
             if (MatchesWord()){
+                Debug.Log(solved);
                 NextWord();
                 
-                Debug.Log(solved);
+                
             }
         }
         
@@ -174,6 +175,8 @@ public class WordGameBoard : MonoBehaviour
         //complares letter by letter
         for(int i = 0; i<word.Length; i++) {
             if (!(guess[i].ToString().Equals(word[i].ToString()))) {
+                guess.Clear();
+                wordS = "";
                 return false;
             }
         }
