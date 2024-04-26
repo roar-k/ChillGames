@@ -23,11 +23,16 @@ public class WordGameBoard : MonoBehaviour
     };
 
     [Header("Game Objects")]
-    public LetterSquare[] squares;
+    //public LetterSquare[] squares;
     public Row[] row;
+    public TextMeshProUGUI scrambledText;
+    private string scrambledS;
     public ArrayList guess = new ArrayList();
     public string wordS;
     [SerializeField] private TextMeshProUGUI guessText;
+    private float t = 11.0f;
+    public TextMeshProUGUI timerText;
+    public GameObject endScreen;
 
     [Header("Solution")]
     public string word;
@@ -36,7 +41,6 @@ public class WordGameBoard : MonoBehaviour
 
     private bool moving;
 
-    private string temp;
     private void Start() {
         LoadData();
         SetRandomWord();
@@ -45,13 +49,24 @@ public class WordGameBoard : MonoBehaviour
     }
 
     private void Update() {
-        foreach(string s in guess) {
-            wordS += s;
+        t -= Time.deltaTime;
+        timerText.text = ((int)t).ToString();
+        if (t< 1) {
+            t = 0;
         }
+        
         guessWord();
+        
+        //displays guess
+        scrambledText.text = scrambledS.ToUpper();
         guessText.text = wordS;
-        if (guess.Count == word.Length) {
-            MatchesWord();
+        //checks if guess is appropriate length before checking for match
+        if (guess.Count == word.Length && Input.GetKeyDown(KeyCode.Return)) {
+            if (MatchesWord()){
+                NextWord();
+                
+                Debug.Log(solved);
+            }
         }
         
         // NextWord();
@@ -79,22 +94,22 @@ public class WordGameBoard : MonoBehaviour
     // Sets the solution to a random word in the valid words list
     private void SetRandomWord() {
         // Gives a 3 letter word to solve until you have solved 5
-        if (solved < 5) {
+        if (solved < 4) {
             word = threeLetterWords[Random.Range(0, threeLetterWords.Length)];
             word = word.ToLower().Trim();
         }
         // Gives a 4 letter word to solve once you have solved five 3 letter words
-        else if (solved < 10) {
+        else if (solved < 9) {
             word = fourLetterWords[Random.Range(0, fourLetterWords.Length)];
             word = word.ToLower().Trim();
         }
         // Gives a 5 letter word to solve once you have solved five 4 letter words
-        else if (solved < 15) {
+        else if (solved < 14) {
             word = fiveLetterWords[Random.Range(0, fiveLetterWords.Length)];
             word = word.ToLower().Trim();
         }
 
-        else if (solved < 20) {
+        else {
             word = sixLetterWords[Random.Range(0, sixLetterWords.Length)];
             word = word.ToLower().Trim();
         }
@@ -108,8 +123,9 @@ public class WordGameBoard : MonoBehaviour
             ScrambleWord(word);
         }
 
-        for (int i = 0; i < squares.Length; i++) {
-            squares[i].SetLetter(scrambledWord[i]);
+        for (int i = 0; i < word.Length; i++) {
+            //squares[i].SetLetter(scrambledWord[i]);
+            scrambledS += scrambledWord[i];
         }
     }
 
@@ -128,46 +144,58 @@ public class WordGameBoard : MonoBehaviour
         return new string(array);
     }
 
-    // adds letter to word guessed
+    
     public void guessWord(){
-        
-        if (guess.Count >0 && Input.GetKeyDown(KeyCode.Backspace)) {
-                guess.RemoveAt(guess.Count -1);
-                
-                wordS = wordS.ToString().Substring(0, wordS.Length -1);
-                
-                
-                
-                
-                
-        } else {
-            for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
-                if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
-                    guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
-                    wordS += (SUPPORTED_KEYS[i].ToString());
-                    break;
+        if (t !=0) {
+            //removing letters
+            if (guess.Count >0 && Input.GetKeyDown(KeyCode.Backspace)) {
+                    guess.RemoveAt(guess.Count -1);
+                    
+                    wordS = wordS.ToString().Substring(0, wordS.Length -1);
+                    
+                    
+                    
+                    
+            //adding letters                
+            } else if (guess.Count < word.Length) {
+                for (int i = 0; i<SUPPORTED_KEYS.Length; i++) {
+                    if (Input.GetKeyDown(SUPPORTED_KEYS[i])) {
+                        guess.Add((SUPPORTED_KEYS[i].ToString()).ToLower());
+                        wordS += (SUPPORTED_KEYS[i].ToString());
+                        break;
 
-                } 
+                    } 
+                }
             }
+            
         }
-        
     }
     public bool MatchesWord() {
+        //complares letter by letter
         for(int i = 0; i<word.Length; i++) {
-            if (!(guess[i].Equals(word[i]))) {
-                
+            if (!(guess[i].ToString().Equals(word[i].ToString()))) {
                 return false;
             }
         }
+        
         return true;
     }
 
     // Goes to the next word
-    /* private void NextWord() {
-        if (MatchesWord()) {
+    public void NextWord() {
+            wordS = "";
+            scrambledS = "";
+            guess.Clear();
             SetRandomWord();
             SetWord();
             solved++;
+            t = 11.0f;
+    }
+
+    public void TimeUp() {
+        if (t == 0) {
+            Time.timeScale = 0;
+            
         }
     }
 

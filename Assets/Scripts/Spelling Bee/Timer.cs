@@ -19,16 +19,11 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
-
-        while (time < 4) {
-            sr = gameObject.GetComponent<SpriteRenderer>();
-            
-            if (time < 1) {
-            time = 0;
-        }
-        timerText.text = ((int)time).ToString();
-        }
+        // time -= Time.deltaTime;
+        // timerText.text = ((int)time).ToString();
+        
+        
+        
         
         
     }
