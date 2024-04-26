@@ -8,12 +8,12 @@ Not yet available.
 ## Feedback
 For feedback and general suggestions, please use this form:
 
-[Feedback Form]
+[Feedback Form](https://forms.office.com/r/s4wxiKKf0y)
 
 ## Bugs
 To submit a bug, please use this form:
 
-[Bugs Form]
+[Bugs Form](https://forms.office.com/r/hMTaKXHguu)
 
 ## Contact Us
 If you have any other questions or comments, you may contact any of us through teams:
