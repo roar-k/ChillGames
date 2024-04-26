@@ -106,7 +106,7 @@ public class GameManager_Wordle : MonoBehaviour
 
     // Loads the player's highscore for first row guesses
     private int LoadHiscore() {
-        return PlayerPrefs.GetInt("highestlevel", 0);
+        return PlayerPrefs.GetInt("highestlevel", 4);
     }
 
     // Add the current solved word to the word list box

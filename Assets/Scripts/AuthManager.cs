@@ -55,6 +55,16 @@ public class AuthManager : MonoBehaviour
         }
     }
 
+    // Signs the player in anonymously (guest account)
+    public async void Guest() {
+        await SignInAnonymouslyAsync();
+
+        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
+        if (isSignedIn) {
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+        }
+    }
+
     // New players can sign up with username and password
     private async Task SignUpWithUsernamePassword(string username, string password) {
         try {
@@ -82,6 +92,24 @@ public class AuthManager : MonoBehaviour
         }
 
         // Notifies players when signing in fails
+        catch (AuthenticationException e) {
+            ShowErrorMessage(e.Message);
+        }
+
+        catch (RequestFailedException e) {
+            ShowErrorMessage(e.Message);
+        }
+    }
+
+    // Allows for anonymous sign in
+    private async Task SignInAnonymouslyAsync() {
+        try {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            messageText.text = "Successfully signed in.";
+            ShowSuccessMessage();
+        }
+
+        // Notifies players when signing in anonymously fails
         catch (AuthenticationException e) {
             ShowErrorMessage(e.Message);
         }
