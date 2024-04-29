@@ -17,12 +17,14 @@ public class ScenesManager : MonoBehaviour
         AccountScreen,
         WordleLeaderboard,
         DinoLeaderboard,
+        BeeLeaderboard,
         Wordle,
         WordleLvl2,
         WordleLvl3,
         WordleLvl4,
         WordleLvl5,
-        DinoGame
+        DinoGame,
+        SpellingBee
     }
 
     public void LoadScene(Scene scene) {

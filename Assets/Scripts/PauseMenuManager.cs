@@ -87,4 +87,8 @@ public class PauseMenuManager : MonoBehaviour
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.DinoLeaderboard);
     }
 
+    public void OpenBeeLeaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.BeeLeaderboard);
+    }
+
 }
