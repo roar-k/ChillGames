@@ -71,12 +71,20 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
+    public void OpenMainMenu() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+    }
+
     public void OpenAccount() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.AccountScreen);
     }
 
-    public void OpenLeaderboard() {
-        ScenesManager.Instance.LoadScene(ScenesManager.Scene.Leaderboard);
+    public void OpenWordleLeaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.WordleLeaderboard);
+    }
+
+    public void OpenDinoLeaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.DinoLeaderboard);
     }
 
 }

@@ -9,11 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/SignInScreen.unity
     guid: e02309fad51d8d34989d31c85d58284d
   - enabled: 1
+    path: Assets/Scenes/Menus/MainMenu.unity
+    guid: cf50d9bf648d9d54fbbf6ec919f9a422
+  - enabled: 1
     path: Assets/Scenes/Menus/AccountScreen.unity
     guid: d4c721ad1149634478b41e55ed629d21
   - enabled: 1
-    path: Assets/Scenes/Menus/Leaderboard.unity
+    path: Assets/Scenes/Wordles/WordleLeaderboard.unity
     guid: dc65291dc742cf24d9aa62837e23bea0
+  - enabled: 1
+    path: Assets/Scenes/Dino Game/DinoLeaderboard.unity
+    guid: 73e789f201809ec41a23a024389cf817
   - enabled: 1
     path: Assets/Scenes/Wordles/Wordle.unity
     guid: 204a9976821d1b74797087a7be778f99
@@ -29,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Wordles/WordleLvl5.unity
     guid: 503502add4ec97b4fb1815ec66461d5f
+  - enabled: 1
+    path: Assets/Scenes/Dino Game/DinoGame.unity
+    guid: 7736c1ec6422bf04689208a11f07ae97
   m_configObjects: {}
