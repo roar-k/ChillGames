@@ -1,4 +1,4 @@
-# Chill Games
+# [Chill Games](https://alexdminascurta.wixsite.com/chill-games)
 ## CS Special Topics Project
 Chill Games is a website that will host a variety of games as well as leaderboards for competition.
 
