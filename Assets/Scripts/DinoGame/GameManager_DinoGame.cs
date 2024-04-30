@@ -100,7 +100,7 @@ public class GameManager_DinoGame : MonoBehaviour
     private void UpdateHiscore() {
         float hiscore = PlayerPrefs.GetFloat("hiscore", 0);
         int lbscore = Mathf.FloorToInt(score);
-        SubmitScore("shs_dino", score);
+        SubmitScore("shs_dino", lbscore);
 
         if (score > hiscore) {
             hiscore = score;
