@@ -200,6 +200,7 @@ public class WordGameBoard : MonoBehaviour
     public void TimeUp() {
         if (t == 0) {
             //Time.timeScale = 0;
+            Debug.Log("aaaaaaaa");
             endScreen.SetActive(true);
         }
     }
