@@ -38,7 +38,7 @@ public class AuthManager : MonoBehaviour
 
         bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
         if (isSignedIn) {
-            ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.AccountScreen);
         }
     }
 

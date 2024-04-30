@@ -34,6 +34,11 @@ public class AccountManager : MonoBehaviour
         string displayNameText = displayNameInput.text;
 
         await UpdatePlayerNameAsync(displayNameText);
+
+        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
+        if (isSignedIn) {
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+        }
     }
 
     // When player signs in successfully
