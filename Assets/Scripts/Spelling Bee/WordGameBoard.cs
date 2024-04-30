@@ -46,6 +46,7 @@ public class WordGameBoard : MonoBehaviour
         SetRandomWord();
         SetWord();
         solved = 0;
+        endScreen.SetActive(false);
     }
 
     private void Update() {
@@ -198,8 +199,15 @@ public class WordGameBoard : MonoBehaviour
 
     public void TimeUp() {
         if (t == 0) {
-            Time.timeScale = 0;
-            
+            //Time.timeScale = 0;
+            endScreen.SetActive(true);
         }
+    }
+    public void LoadMenu() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+    }
+
+    public void PlayBee() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.SpellingBee);
     }
 }

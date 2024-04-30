@@ -39,7 +39,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Dino Game/DinoGame.unity
     guid: 7736c1ec6422bf04689208a11f07ae97
   - enabled: 1
-    path: Assets/Scenes/SpellingBee.unity
+    path: Assets/Scenes/Spelling Bee/SpellingBee.unity
     guid: 65caea271ac4bcc499291388bbee26e4
   - enabled: 1
     path: Assets/Scenes/BeeLeaderboard.unity
