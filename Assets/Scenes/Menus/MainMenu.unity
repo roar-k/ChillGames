@@ -1579,7 +1579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play Dino Game
+  m_text: Play Dino Run
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73120d03dfe2ae147bdf97fbad1c6846, type: 2}
   m_sharedMaterial: {fileID: -9034048300763345050, guid: 73120d03dfe2ae147bdf97fbad1c6846, type: 2}
@@ -2220,7 +2220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cc8aa0d6d167e034ba0af87b186dcf64, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97fc312cbb61d05438992d4758dcccf6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2410,7 +2410,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play Wordle
+  m_text: Play CodeWord
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d70fe7533d14b384697b61e534ce0e0c, type: 2}
   m_sharedMaterial: {fileID: -6408258231214114417, guid: d70fe7533d14b384697b61e534ce0e0c, type: 2}

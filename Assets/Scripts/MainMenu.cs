@@ -6,6 +6,7 @@ using TMPro;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
 
+// Script for handling the "MainMenu" scene
 public class MainMenu : MonoBehaviour
 {
     public void PlayWordle() {
