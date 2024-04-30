@@ -30,7 +30,7 @@ public class WordGameBoard : MonoBehaviour
     public ArrayList guess = new ArrayList();
     public string wordS;
     [SerializeField] private TextMeshProUGUI guessText;
-    private float t = 11.0f;
+    public float t = 11.0f;
     public TextMeshProUGUI timerText;
     public GameObject endScreen;
 
@@ -46,6 +46,7 @@ public class WordGameBoard : MonoBehaviour
         SetRandomWord();
         SetWord();
         solved = 0;
+        endScreen.SetActive(false);
     }
 
     private void Update() {
@@ -53,6 +54,7 @@ public class WordGameBoard : MonoBehaviour
         timerText.text = ((int)t).ToString();
         if (t< 1) {
             t = 0;
+            TimeUp();
         }
         
         guessWord();
@@ -196,9 +198,15 @@ public class WordGameBoard : MonoBehaviour
     }
 
     public void TimeUp() {
-        if (t == 0) {
-            Time.timeScale = 0;
-            
-        }
+
+            endScreen.SetActive(true);
+        
+    }
+    public void LoadMenu() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+    }
+
+    public void PlayBee() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.SpellingBee);
     }
 }
