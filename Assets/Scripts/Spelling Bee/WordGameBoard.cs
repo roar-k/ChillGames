@@ -121,12 +121,11 @@ public class WordGameBoard : MonoBehaviour
     private void SetWord() {
         string scrambledWord = ScrambleWord(word);
         // Makes sure the scrambled word does not match the solution
-        while (scrambledWord == word) {
+        if (scrambledWord == word) {
             ScrambleWord(word);
         }
 
         for (int i = 0; i < word.Length; i++) {
-            //squares[i].SetLetter(scrambledWord[i]);
             scrambledS += scrambledWord[i];
         }
     }
