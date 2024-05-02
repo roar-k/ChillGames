@@ -33,6 +33,8 @@ public class WordGameBoard : MonoBehaviour
     public float t = 11.0f;
     public TextMeshProUGUI timerText;
     public GameObject endScreen;
+    public int score;
+    public TextMeshProUGUI scoreKeeper;
 
     [Header("Solution")]
     public string word;
@@ -45,6 +47,7 @@ public class WordGameBoard : MonoBehaviour
         LoadData();
         SetRandomWord();
         SetWord();
+        score = 0;
         solved = 0;
         endScreen.SetActive(false);
     }
@@ -52,6 +55,7 @@ public class WordGameBoard : MonoBehaviour
     private void Update() {
         t -= Time.deltaTime;
         timerText.text = ((int)t).ToString();
+        scoreKeeper.text = score.ToString();
         if (t< 1) {
             t = 0;
             TimeUp();
@@ -97,17 +101,17 @@ public class WordGameBoard : MonoBehaviour
     // Sets the solution to a random word in the valid words list
     private void SetRandomWord() {
         // Gives a 3 letter word to solve until you have solved 5
-        if (solved < 4) {
+        if (solved < 14) {
             word = threeLetterWords[Random.Range(0, threeLetterWords.Length)];
             word = word.ToLower().Trim();
         }
         // Gives a 4 letter word to solve once you have solved five 3 letter words
-        else if (solved < 9) {
+        else if (solved < 29) {
             word = fourLetterWords[Random.Range(0, fourLetterWords.Length)];
             word = word.ToLower().Trim();
         }
         // Gives a 5 letter word to solve once you have solved five 4 letter words
-        else if (solved < 14) {
+        else if (solved < 44) {
             word = fiveLetterWords[Random.Range(0, fiveLetterWords.Length)];
             word = word.ToLower().Trim();
         }
@@ -181,7 +185,7 @@ public class WordGameBoard : MonoBehaviour
                 return false;
             }
         }
-        
+        score += 5*(int)t;
         return true;
     }
 
@@ -193,6 +197,7 @@ public class WordGameBoard : MonoBehaviour
             SetRandomWord();
             SetWord();
             solved++;
+            score += 100*((1+ solved/5));
             t = 11.0f;
             gameManager.SubmitScore("shs_bee", solved);
     }
