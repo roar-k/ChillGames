@@ -307,7 +307,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -726,6 +726,83 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bfb7bac14601a514aa50e57fe30e8bc9, type: 3}
   gravity: -9.8
   strength: 5
+--- !u!1 &868168179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868168181}
+  - component: {fileID: 868168180}
+  m_Layer: 0
+  m_Name: Sky
+  m_TagString: Obstacle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &868168180
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868168179}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &868168181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868168179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7, z: 0}
+  m_LocalScale: {x: 24, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &915010851
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +847,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9871b65163c154bbc5e3e7a058b1da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 690234855}
+  scoreText: {fileID: 358256226}
+  playButton: {fileID: 1421957212}
+  gameOver: {fileID: 455341388}
 --- !u!1 &1013014818
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,9 +973,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 350498687622121013, guid: c83516b8c53c6184e94629c7b31e4d74, type: 3}
-  spawnRate: 1
+  spawnRate: 1.1
   minHeight: -1
-  maxHeight: 1
+  maxHeight: 2
 --- !u!4 &1163944300
 Transform:
   m_ObjectHideFlags: 0
@@ -991,7 +1072,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1421957215}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 915010853}
+        m_TargetAssemblyTypeName: GameManager_Flappy, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1421957215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,8 +1218,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 358256224}
-  - {fileID: 455341389}
   - {fileID: 1421957213}
+  - {fileID: 455341389}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1239,7 +1332,8 @@ SceneRoots:
   - {fileID: 690234854}
   - {fileID: 1964710282}
   - {fileID: 379761748}
+  - {fileID: 868168181}
   - {fileID: 1163944300}
-  - {fileID: 915010852}
   - {fileID: 1846897311}
   - {fileID: 86104067}
+  - {fileID: 915010852}

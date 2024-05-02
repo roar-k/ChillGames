@@ -24,6 +24,13 @@ public class FlappyPlayer : MonoBehaviour
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
     }
 
+    private void OnEnable() {
+        Vector3 position = transform.position;
+        position.y = 0f;
+        transform.position = position;
+        direction = Vector3.zero;
+    }
+
     private void Update() {
         // Bird goes up if spacebar or mousebutton is pressed
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
