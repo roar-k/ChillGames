@@ -1493,7 +1493,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 392503788}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayWordle
+        m_MethodName: PlayBee
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2638,7 +2638,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 392503788}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayWordle
+        m_MethodName: PlayDino
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
