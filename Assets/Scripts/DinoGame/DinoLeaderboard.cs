@@ -50,8 +50,8 @@ public class DinoLeaderboard : MonoBehaviour
 
             foreach (var leaderboardEntry in scoresResponse.Results) {
                 var scoreView = Instantiate(scoreViewPrefab, scoresContainer);
-                scoreView.Initialize(leaderboardEntry.Rank.ToString(), leaderboardEntry.PlayerName,
-                    leaderboardEntry.Score.ToString());
+                var name = leaderboardEntry.PlayerName.Split('#')[0];
+                scoreView.Initialize(leaderboardEntry.Rank.ToString(), name, leaderboardEntry.Score.ToString());
             }
 
             // Notifies players when loading score is successfully completed
