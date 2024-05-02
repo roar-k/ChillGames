@@ -72,7 +72,9 @@ public class WordleLeaderboard : MonoBehaviour
 
             foreach (var leaderboardEntry in scoresResponse.Results) {
                 var scoreView = Instantiate(scoreViewPrefab, scoresContainer);
-                scoreView.Initialize(leaderboardEntry.Rank.ToString(), leaderboardEntry.PlayerName,
+                var name = leaderboardEntry.PlayerName.Split('#')[0];
+
+                scoreView.Initialize(leaderboardEntry.Rank.ToString(), name,
                     leaderboardEntry.Score.ToString());
             }
 

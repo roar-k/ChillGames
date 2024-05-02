@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FlappyPlayer : MonoBehaviour
 {
+    public GameManager_Flappy gameManager;
+
     [Header("Sprites")]
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
@@ -63,12 +65,12 @@ public class FlappyPlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         // Triggers Game Over when player hits an obstacle
         if (other.gameObject.tag == "Obstacle") {
-            GameManager_Flappy.Instance.GameOver();
+            gameManager.GameOver();
         }
 
         // Increases score when player goes through a pipe
         else if (other.gameObject.tag == "Scoring") {
-            GameManager_Flappy.Instance.IncreaseScore();
+            gameManager.IncreaseScore();
         }
     }
 }

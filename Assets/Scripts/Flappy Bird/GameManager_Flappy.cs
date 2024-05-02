@@ -6,8 +6,6 @@ using TMPro;
 
 public class GameManager_Flappy : MonoBehaviour
 {
-    public static GameManager_Flappy Instance { get; private set; }
-
     public FlappyPlayer player;
 
     [Header("UI")]
