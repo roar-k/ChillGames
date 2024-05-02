@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class GameManager_Flappy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private int score;
+
+    public void GameOver() {
+        Debug.Log("Game Over");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void IncreaseScore() {
+        score++;
     }
+
+
 }

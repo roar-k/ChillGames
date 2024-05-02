@@ -46,4 +46,16 @@ public class FlappyPlayer : MonoBehaviour
 
         spriteRenderer.sprite = sprites[spriteIndex];
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        // Triggers Game Over when player hits an obstacle
+        if (other.gameObject.tag == "Obstacle") {
+            FindObjectOfType<GameManager_Flappy>().GameOver();
+        }
+
+        // Increases score when player goes through a pipe
+        else if (other.gameObject.tag == "Scoring") {
+            FindObjectOfType<GameManager_Flappy>().IncreaseScore();
+        }
+    }
 }
