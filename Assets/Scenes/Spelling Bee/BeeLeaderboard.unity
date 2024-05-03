@@ -3705,7 +3705,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1833834062}
-        m_TargetAssemblyTypeName: BeeLeaderboard, Assembly-CSharp
+        m_TargetAssemblyTypeName: LeaderboardManager, Assembly-CSharp
         m_MethodName: PlayBee
         m_Mode: 1
         m_Arguments:
@@ -4551,7 +4551,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1833834059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26ec45ad910a6746916a469382d1da1, type: 3}
+  m_Script: {fileID: 11500000, guid: b29df11545cc07549a3600071db50903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   leaderboardId: shs_bee

@@ -682,7 +682,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7035434fe0e2aab4fb5a08df2ad3e83e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fda04036dbe79c34c853d9cbd8664f11, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -722,9 +722,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 915010853}
   sprites:
-  - {fileID: 21300000, guid: 7035434fe0e2aab4fb5a08df2ad3e83e, type: 3}
-  - {fileID: 21300000, guid: 5f8f1b823685c2e40a03f72f40d0db90, type: 3}
-  - {fileID: 21300000, guid: bfb7bac14601a514aa50e57fe30e8bc9, type: 3}
+  - {fileID: 21300000, guid: fda04036dbe79c34c853d9cbd8664f11, type: 3}
+  - {fileID: 21300000, guid: dce2b9d5824244743ba69af3e63e8def, type: 3}
+  - {fileID: 21300000, guid: 8a9483ce6154bfa47800bfb66c499b1d, type: 3}
   gravity: -9.8
   strength: 5
   tilt: 5
