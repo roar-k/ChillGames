@@ -11,8 +11,6 @@ using Unity.Services.Authentication;
 
 public class GameManager_Wordle : MonoBehaviour
 {
-    private WordleLeaderboard leaderboard;
-
     public Board board;
     public CanvasGroup statistics;
 

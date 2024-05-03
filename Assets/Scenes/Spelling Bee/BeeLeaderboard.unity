@@ -1368,7 +1368,7 @@ GameObject:
   - component: {fileID: 664249618}
   - component: {fileID: 664249617}
   m_Layer: 5
-  m_Name: Solved Text
+  m_Name: Score Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1413,9 +1413,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Solved
-
-'
+  m_text: Score
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d70fe7533d14b384697b61e534ce0e0c, type: 2}
   m_sharedMaterial: {fileID: -6408258231214114417, guid: d70fe7533d14b384697b61e534ce0e0c, type: 2}
@@ -3707,7 +3705,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1833834062}
-        m_TargetAssemblyTypeName: BeeLeaderboard, Assembly-CSharp
+        m_TargetAssemblyTypeName: LeaderboardManager, Assembly-CSharp
         m_MethodName: PlayBee
         m_Mode: 1
         m_Arguments:
@@ -4553,7 +4551,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1833834059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26ec45ad910a6746916a469382d1da1, type: 3}
+  m_Script: {fileID: 11500000, guid: b29df11545cc07549a3600071db50903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   leaderboardId: shs_bee

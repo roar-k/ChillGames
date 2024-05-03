@@ -1,8 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Services.Core;
+using Unity.Services.Leaderboards;
+using Unity.Services.Authentication;
 
 public class GameManager_Flappy : MonoBehaviour
 {
@@ -11,6 +14,7 @@ public class GameManager_Flappy : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI scoreText;
     public GameObject playButton;
+    public GameObject leaderboardButton;
     public GameObject gameOver;
 
     private int score;
@@ -27,6 +31,7 @@ public class GameManager_Flappy : MonoBehaviour
 
         playButton.SetActive(false);
         gameOver.SetActive(false);
+        leaderboardButton.SetActive(false);
 
         Time.timeScale = 1f;
         player.enabled = true;
@@ -48,6 +53,7 @@ public class GameManager_Flappy : MonoBehaviour
     public void GameOver() {
         gameOver.SetActive(true);
         playButton.SetActive(true);
+        leaderboardButton.SetActive(true);
 
         Pause();
     }
@@ -55,7 +61,29 @@ public class GameManager_Flappy : MonoBehaviour
     public void IncreaseScore() {
         score++;
         scoreText.text = score.ToString();
+
+        SubmitScore("shs_bird", score);
     }
 
+    // Changes to the BirdLeaderboard scene
+    public void OpenLeaderboard() {
+        Time.timeScale = 1f;
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.BirdLeaderboard);
+    }
+
+    public async void SubmitScore(string leaderboardId, int score) {
+        await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
+    }
+
+    private async Task AddPlayerScoreAsync(string leaderboardId, int score) {
+        try {
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
+        }
+
+        catch (Exception e) {
+            Debug.Log(e.Message);
+            throw;
+        }
+    }
 
 }

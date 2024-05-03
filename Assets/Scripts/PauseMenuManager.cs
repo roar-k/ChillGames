@@ -91,4 +91,8 @@ public class PauseMenuManager : MonoBehaviour
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.BeeLeaderboard);
     }
 
+    public void OpenBirdLeaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.BirdLeaderboard);
+    }
+
 }

@@ -20,4 +20,8 @@ public class MainMenu : MonoBehaviour
     public void PlayBee() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.SpellingBee);
     }
+
+    public void PlayBird() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.FlappyBird);
+    }
 }
