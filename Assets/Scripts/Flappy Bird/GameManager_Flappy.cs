@@ -67,6 +67,7 @@ public class GameManager_Flappy : MonoBehaviour
 
     // Changes to the BirdLeaderboard scene
     public void OpenLeaderboard() {
+        Time.timeScale = 1f;
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.BirdLeaderboard);
     }
 
