@@ -3610,7 +3610,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play Dino Run
+  m_text: Play T-Rex Run
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73120d03dfe2ae147bdf97fbad1c6846, type: 2}
   m_sharedMaterial: {fileID: -9034048300763345050, guid: 73120d03dfe2ae147bdf97fbad1c6846, type: 2}

@@ -724,7 +724,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1437991505}
         m_TargetAssemblyTypeName: GameManager_Wordle, Assembly-CSharp
         m_MethodName: CloseStatistics
         m_Mode: 1
