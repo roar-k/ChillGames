@@ -289,6 +289,10 @@ public class Board : MonoBehaviour
         }
     }
 
+    public string GetWord() {
+        return word;
+    }
+
     // Main Menu and Play Again buttons disappear when script is enabled
     private void OnEnable() {
         mainMenuButton.gameObject.SetActive(false);
