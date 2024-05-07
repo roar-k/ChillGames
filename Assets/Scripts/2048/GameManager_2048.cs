@@ -1,7 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using Unity.Services.Core;
+using Unity.Services.Leaderboards;
+using Unity.Services.Authentication;
 
 // Game Manage script for the 2048 game
 public class GameManager_2048 : MonoBehaviour
@@ -36,10 +40,6 @@ public class GameManager_2048 : MonoBehaviour
         gameOver.interactable = true;
 
         StartCoroutine(Fade(gameOver, 1f, 1f));
-    }
-
-    public void MainMenu() {
-        //...
     }
 
     // Fading animation for Game Over Screen
