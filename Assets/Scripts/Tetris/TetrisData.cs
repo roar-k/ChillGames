@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Static data of the coordiates of each block that creates the shape
+// Static data of the coordiates of each block that creates each shape
 // Use of WallKicks for shape rotation
 public static class TetrisData
 {
