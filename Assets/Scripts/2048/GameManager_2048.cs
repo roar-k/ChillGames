@@ -77,6 +77,7 @@ public class GameManager_2048 : MonoBehaviour
         scoreText.text = score.ToString();
 
         SaveHiscore();
+        SubmitScore("shs_2048", score);
     }
 
     // Saves the highscore into player prefs
