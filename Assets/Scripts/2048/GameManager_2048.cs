@@ -1,11 +1,13 @@
 using System.Threading.Tasks;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Authentication;
+
 
 // Game Manage script for the 2048 game
 public class GameManager_2048 : MonoBehaviour
@@ -16,6 +18,10 @@ public class GameManager_2048 : MonoBehaviour
     public TextMeshProUGUI hiscoreText;
 
     private int score;
+
+    private async void Awake() {
+        await UnityServices.InitializeAsync();
+    }
 
     private void Start() {
         NewGame();
@@ -85,5 +91,20 @@ public class GameManager_2048 : MonoBehaviour
     // Loads the player's highscore
     public int LoadHiscore() {
         return PlayerPrefs.GetInt("hiscore", 0);
+    }
+
+    public async void SubmitScore(string leaderboardId, int score) {
+        await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
+    }
+
+    private async Task AddPlayerScoreAsync(string leaderboardId, int score) {
+        try {
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
+        }
+
+        catch (Exception e) {
+            Debug.Log(e.Message);
+            throw;
+        }
     }
 }
