@@ -24,4 +24,8 @@ public class MainMenu : MonoBehaviour
     public void PlayBird() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.FlappyBird);
     }
+
+    public void Play2048() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.SHS2048);
+    }
 }
