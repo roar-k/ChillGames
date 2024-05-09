@@ -5341,6 +5341,18 @@ PrefabInstance:
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 4176954578222381309, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176954578222381309, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8745099
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176954578222381309, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176954578222381309, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
       propertyPath: m_fontSizeBase
       value: 24
       objectReference: {fileID: 0}
@@ -5381,6 +5393,18 @@ PrefabInstance:
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 5951964720336921985, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951964720336921985, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8745099
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951964720336921985, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951964720336921985, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
       propertyPath: m_fontSizeBase
       value: 24
       objectReference: {fileID: 0}
@@ -5395,6 +5419,18 @@ PrefabInstance:
     - target: {fileID: 6320166666217200093, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
       propertyPath: m_fontSize
       value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320166666217200093, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320166666217200093, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8745099
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320166666217200093, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9921569
       objectReference: {fileID: 0}
     - target: {fileID: 6320166666217200093, guid: 983b5c065d87aa8439ac1ab291980db7, type: 3}
       propertyPath: m_fontSizeBase
