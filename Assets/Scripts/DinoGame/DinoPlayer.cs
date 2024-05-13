@@ -23,7 +23,7 @@ public class DinoPlayer : MonoBehaviour
         if (character.isGrounded) {
             direction = Vector3.down;
 
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
                 direction = Vector3.up * jumpForce;
             }
         }

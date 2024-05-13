@@ -1335,7 +1335,7 @@ MonoBehaviour:
   passwordInput: {fileID: 976301154}
   messageText: {fileID: 1883849724}
   errorMessageText: {fileID: 846829508}
-  displayErrorDuration: 8
+  displayErrorDuration: 10
 --- !u!4 &836784240
 Transform:
   m_ObjectHideFlags: 0
