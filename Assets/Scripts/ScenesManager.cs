@@ -19,6 +19,7 @@ public class ScenesManager : MonoBehaviour
         DinoLeaderboard,
         BeeLeaderboard,
         BirdLeaderboard,
+        SHS2048Leaderboard,
         Wordle,
         WordleLvl2,
         WordleLvl3,
@@ -26,7 +27,8 @@ public class ScenesManager : MonoBehaviour
         WordleLvl5,
         DinoGame,
         SpellingBee,
-        FlappyBird
+        FlappyBird,
+        SHS2048
     }
 
     public void LoadScene(Scene scene) {

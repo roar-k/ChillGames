@@ -51,7 +51,7 @@ public class LeaderboardManager : MonoBehaviour
             foreach (var leaderboardEntry in scoresResponse.Results) {
                 var scoreView = Instantiate(scoreViewPrefab, scoresContainer);
                 var name = leaderboardEntry.PlayerName.Split('#')[0];
-                scoreView.Initialize(leaderboardEntry.Rank.ToString(), name, leaderboardEntry.Score.ToString());
+                scoreView.Initialize((leaderboardEntry.Rank + 1).ToString(), name, leaderboardEntry.Score.ToString());
             }
 
             // Notifies players when loading score is successfully completed
@@ -84,5 +84,9 @@ public class LeaderboardManager : MonoBehaviour
 
     public void PlayBird() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.FlappyBird);
+    }
+
+    public void Play2048() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.SHS2048);
     }
 }
