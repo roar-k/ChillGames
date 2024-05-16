@@ -18,12 +18,12 @@ public enum Tetromino
 
 [System.Serializable]
 public struct TetrominoData {
-    public Tetromino tetromino;
     public TileBase tile;
+    public Tetromino tetromino;
     public Vector2Int[] cells { get; private set; }
 
     public void Initialize() {
-        this.cells = TetrisData.Cells[this.tetromino];
+        cells = TetrisData.Cells[tetromino];
     }
 }
 

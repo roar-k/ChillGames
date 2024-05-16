@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 // Controls the logic for each individual shape/piece
 public class TetrisPiece : MonoBehaviour
@@ -30,11 +27,11 @@ public class TetrisPiece : MonoBehaviour
         this.board.Clear(this);
 
         // Gets input from player to control the movement of the blocks
-        if (Input.GetKeyDown(KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow)) {
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
             Move(Vector2Int.left);
         }
 
-        else if (Input.GetKeyDown(KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow)) {
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
             Move(Vector2Int.right);
         }
 
