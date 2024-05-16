@@ -51,7 +51,7 @@ public class LeaderboardManager : MonoBehaviour
             foreach (var leaderboardEntry in scoresResponse.Results) {
                 var scoreView = Instantiate(scoreViewPrefab, scoresContainer);
                 var name = leaderboardEntry.PlayerName.Split('#')[0];
-                scoreView.Initialize(leaderboardEntry.Rank.ToString(), name, leaderboardEntry.Score.ToString());
+                scoreView.Initialize((leaderboardEntry.Rank + 1).ToString(), name, leaderboardEntry.Score.ToString());
             }
 
             // Notifies players when loading score is successfully completed
