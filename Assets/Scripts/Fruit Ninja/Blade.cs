@@ -6,15 +6,18 @@ public class Blade : MonoBehaviour
 {
     private Camera mainCamera;
     private Collider bladeCollider;
+    private TrailRenderer bladeTrail;
 
     private bool slicing;
 
     public Vector3 direction { get; private set; }
+    public float sliceForce = 5f;
     public float minSliceVelocity = 0.01f;
 
     private void Awake() {
         mainCamera = Camera.main;
         bladeCollider = GetComponent<Collider>();
+        bladeTrail = GetComponentInChildren<TrailRenderer>();
     }
 
     private void OnEnable() {
@@ -32,7 +35,7 @@ public class Blade : MonoBehaviour
         }
 
         // Stops slicing fruit when mouse button is not held down
-        else if (Input.GetMouseButtonDown(0)) {
+        else if (Input.GetMouseButtonUp(0)) {
             StopSlicing();
         }
 
@@ -42,15 +45,20 @@ public class Blade : MonoBehaviour
     }
 
     private void StartSlicing() {
-        transform.position = newPosition;
+        Vector3 position = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        position.z = 0f;
+        transform.position = position;
 
         slicing = true;
         bladeCollider.enabled = true;
+        bladeTrail.enabled = true;
+        bladeTrail.Clear();
     }
 
     private void StopSlicing() {
         slicing = false;
         bladeCollider.enabled = false;
+        bladeTrail.enabled = false;
     }
 
     // Blade follows the mouse cursor
