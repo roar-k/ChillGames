@@ -1,12 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-// Script for handling the spawning of fruits in Fruit Ninja
+// Script for handling the spawning of fruits and bombs in Fruit Ninja
 public class FruitSpawner : MonoBehaviour
 {
     private Collider spawnArea;
 
     public GameObject[] fruitPrefabs;
+
+    public GameObject bombPrefab;
+
+    [Range(0f, 1f)]
+    public float bombChance = 0.05f;
 
     public float minSpawnDelay = 0.25f;
     public float maxSpawnDelay = 1f;
@@ -39,6 +44,11 @@ public class FruitSpawner : MonoBehaviour
         while (enabled) {
             // Picks a random fruit to spawn
             GameObject prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
+
+            // Spawns a bomb randomly
+            if (Random.value < bombChance) {
+                prefab = bombPrefab;
+            }
 
             // Spawns the fruits at a random place within the spawn area
             Vector3 position = new Vector3();

@@ -19,6 +19,8 @@ public class Fruit : MonoBehaviour
 
     // The sliced fruit objects becomes active when blade slices it
     private void Slice(Vector3 direction, Vector3 position, float force) {
+        FindObjectOfType<GameManager_Fruit>().IncreaseScore();
+
         whole.SetActive(false);
         sliced.SetActive(true);
 
