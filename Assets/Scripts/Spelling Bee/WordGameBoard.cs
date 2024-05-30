@@ -203,8 +203,9 @@ public class WordGameBoard : MonoBehaviour
     }
 
     public void TimeUp() {
-
-            endScreen.SetActive(true);
+        endScreen.SetActive(true);
+        wordS = word.ToUpper();
+        guessText.color = new Color32(0, 0, 0, 255);
         
     }
     public void LoadMenu() {
