@@ -26,7 +26,7 @@ public class GameManager_DinoGame : MonoBehaviour
     private Spawner spawner;
 
     private float score;
-
+    
     private async void Awake() {
         await UnityServices.InitializeAsync();
 
