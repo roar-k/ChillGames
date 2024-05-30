@@ -51,6 +51,11 @@ public class GameManager_Fruit : MonoBehaviour
         }
     }
 
+    // Game is over when health is 0 or when bomb is sliced
+    private void GameOver() {
+
+    }
+
     // Increases score whenever fruit is sliced
     public void IncreaseScore() {
         score++;
