@@ -11,8 +11,6 @@ using Unity.Services.Authentication;
 
 public class GameManager_Wordle : MonoBehaviour
 {
-    private WordleLeaderboard leaderboard;
-
     public Board board;
     public CanvasGroup statistics;
 
@@ -44,7 +42,7 @@ public class GameManager_Wordle : MonoBehaviour
         board.enabled = false;
 
         highText.text = LoadHiscore().ToString() + " Letter Words";
-        wordListText.text = LoadWords().ToString();
+        wordListText.text = board.GetWord() + " ;)";
 
         StartCoroutine(Fade(statistics, 1f, 0.5f));
 

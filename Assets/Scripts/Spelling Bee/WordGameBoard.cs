@@ -199,7 +199,7 @@ public class WordGameBoard : MonoBehaviour
             solved++;
             score += 100*((1+ solved/5));
             t = 11.0f;
-            gameManager.SubmitScore("shs_bee", solved);
+            gameManager.SubmitScore("shs_bee", score);
     }
 
     public void TimeUp() {

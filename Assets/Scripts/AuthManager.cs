@@ -23,7 +23,7 @@ public class AuthManager : MonoBehaviour
     public TextMeshProUGUI messageText;
     public TextMeshProUGUI errorMessageText;
 
-    public float displayErrorDuration = 5f;
+    public float displayErrorDuration = 8f;
 
     private async void Awake() {
         await UnityServices.InitializeAsync();

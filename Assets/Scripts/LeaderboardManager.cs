@@ -7,9 +7,9 @@ using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Authentication;
 
-public class BeeLeaderboard : MonoBehaviour
+public class LeaderboardManager : MonoBehaviour
 {
-    public string leaderboardId = "shs_bee";
+    public string leaderboardId = "";
     public LeaderboardScoreView scoreViewPrefab;
     public GameObject leaderboardDisplay;
 
@@ -51,9 +51,7 @@ public class BeeLeaderboard : MonoBehaviour
             foreach (var leaderboardEntry in scoresResponse.Results) {
                 var scoreView = Instantiate(scoreViewPrefab, scoresContainer);
                 var name = leaderboardEntry.PlayerName.Split('#')[0];
-
-                scoreView.Initialize(leaderboardEntry.Rank.ToString(), name,
-                    leaderboardEntry.Score.ToString());
+                scoreView.Initialize((leaderboardEntry.Rank + 1).ToString(), name, leaderboardEntry.Score.ToString());
             }
 
             // Notifies players when loading score is successfully completed
@@ -67,12 +65,28 @@ public class BeeLeaderboard : MonoBehaviour
         }
     }
 
+    private void OnDestroy() {
+        AuthenticationService.Instance.SignedIn -= OnSignedIn;
+        AuthenticationService.Instance.SignInFailed -= OnSignInFailed;
+    }
+
+    public void PlayWordle() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.Wordle);
+    }
+
+    public void PlayDino() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.DinoGame);
+    }
+
     public void PlayBee() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.SpellingBee);
     }
 
-    private void OnDestroy() {
-        AuthenticationService.Instance.SignedIn -= OnSignedIn;
-        AuthenticationService.Instance.SignInFailed -= OnSignInFailed;
+    public void PlayBird() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.FlappyBird);
+    }
+
+    public void Play2048() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.SHS2048);
     }
 }

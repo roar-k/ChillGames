@@ -14,12 +14,14 @@ public class AccountManager : MonoBehaviour
 {
     [Header("Input")]
     public TMP_InputField displayNameInput;
+    public TMP_InputField currentPasswordInput;
+    public TMP_InputField newPasswordInput;
 
     [Header("Messages")]
     public TextMeshProUGUI messageText;
     public TextMeshProUGUI errorMessageText;
 
-    public float displayErrorDuration = 5f;
+    public float displayErrorDuration = 8f;
 
     private async void Awake() {
         await UnityServices.InitializeAsync();
@@ -34,11 +36,13 @@ public class AccountManager : MonoBehaviour
         string displayNameText = displayNameInput.text;
 
         await UpdatePlayerNameAsync(displayNameText);
+    }
 
-        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
-        if (isSignedIn) {
-            ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
-        }
+    public async void ChangePassword() {
+        string currentPasswordText = currentPasswordInput.text;
+        string newPasswordText = newPasswordInput.text;
+
+        await UpdatePasswordAsync(currentPasswordText, newPasswordText);
     }
 
     // When player signs in successfully
@@ -68,6 +72,23 @@ public class AccountManager : MonoBehaviour
         } 
     }
 
+    // Change the players password
+    private async Task UpdatePasswordAsync(string currentPassword, string newPassword) {
+        try {
+            await AuthenticationService.Instance.UpdatePasswordAsync(currentPassword, newPassword);
+            messageText.text = "Password changed sucessfully!";
+        }
+
+        // Notifies players when there is an error with changing their password
+        catch (AuthenticationException e) {
+            ShowErrorMessage(e.Message);
+        }
+
+        catch (RequestFailedException e) {
+            ShowErrorMessage(e.Message);
+        } 
+    }
+
     // Shows an error message there is an error with authentication
     public void ShowErrorMessage(string message) {
         errorMessageText.text = message;
@@ -77,6 +98,13 @@ public class AccountManager : MonoBehaviour
 
     private void HideErrorMessage() {
         errorMessageText.gameObject.SetActive(false);
+    }
+
+    public void GoMainMenu() {
+        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
+        if (isSignedIn) {
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+        }
     }
 
     private void OnDestroy() {

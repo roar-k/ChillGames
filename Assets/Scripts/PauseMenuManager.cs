@@ -91,4 +91,12 @@ public class PauseMenuManager : MonoBehaviour
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.BeeLeaderboard);
     }
 
+    public void OpenBirdLeaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.BirdLeaderboard);
+    }
+
+    public void Open2048Leaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.SHS2048Leaderboard);
+    }
+
 }
