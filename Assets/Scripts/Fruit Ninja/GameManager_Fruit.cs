@@ -8,6 +8,7 @@ public class GameManager_Fruit : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public Image fadeImage;
+    public GameObject gameOverScreen;
 
     private Blade blade;
     private FruitSpawner spawner;
@@ -24,7 +25,7 @@ public class GameManager_Fruit : MonoBehaviour
     }
 
     // Starts a new game and resets score back to 0
-    private void NewGame() {
+    public void NewGame() {
         Time.timeScale = 1f;
 
         blade.enabled = true;
@@ -32,6 +33,8 @@ public class GameManager_Fruit : MonoBehaviour
 
         score = 0;
         scoreText.text = score.ToString();
+
+        gameOverScreen.SetActive(false);
 
         ClearScene();
     }
@@ -53,7 +56,9 @@ public class GameManager_Fruit : MonoBehaviour
 
     // Game is over when health is 0 or when bomb is sliced
     private void GameOver() {
+        ClearScene();
 
+        gameOverScreen.SetActive(true);
     }
 
     // Increases score whenever fruit is sliced
@@ -87,7 +92,7 @@ public class GameManager_Fruit : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1f);
 
-        NewGame();
+        ClearScene();
 
         elapsed = 0f;
 
@@ -99,5 +104,15 @@ public class GameManager_Fruit : MonoBehaviour
 
             yield return null;
         }
+
+        GameOver();
+    }
+
+    public void OpenFruitLeaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+    }
+
+    public void OpenMainMenu() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
     }
 }
