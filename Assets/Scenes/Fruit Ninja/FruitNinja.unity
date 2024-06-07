@@ -1427,7 +1427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sliceForce: 10
-  minSliceVelocity: 0.01
+  minSliceVelocity: 0.1
 --- !u!135 &973756734
 SphereCollider:
   m_ObjectHideFlags: 0
