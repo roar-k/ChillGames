@@ -14,6 +14,7 @@ public class GameManager_Fruit : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public Image fadeImage;
     public GameObject gameOverScreen;
+    public int health = 5;
 
     private Blade blade;
     private FruitSpawner spawner;
@@ -112,6 +113,18 @@ public class GameManager_Fruit : MonoBehaviour
         }
 
         GameOver();
+    }
+
+    // Subtracts a health when the fruit is not sliced
+    public void MissedFruit() {
+        if (health > 0) {
+            health--;
+        }
+
+        else {
+            GameOver();
+        }
+
     }
 
     public async void SubmitScore(string leaderboardId, int score) {
