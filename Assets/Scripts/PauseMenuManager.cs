@@ -99,4 +99,8 @@ public class PauseMenuManager : MonoBehaviour
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.SHS2048Leaderboard);
     }
 
+    public void OpenFruitLeaderboard() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.FruitLeaderboard);
+    }
+
 }

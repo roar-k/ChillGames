@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Services.Core;
+using Unity.Services.Leaderboards;
+using Unity.Services.Authentication;
 
 public class GameManager_Fruit : MonoBehaviour
 {
@@ -65,6 +70,7 @@ public class GameManager_Fruit : MonoBehaviour
     public void IncreaseScore() {
         score++;
         scoreText.text = score.ToString();
+        SubmitScore("shs_fruit", score);
     }
 
     // Blade and fruits stop spawning when bomb is sliced, game over
@@ -108,8 +114,23 @@ public class GameManager_Fruit : MonoBehaviour
         GameOver();
     }
 
+    public async void SubmitScore(string leaderboardId, int score) {
+        await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
+    }
+
+    private async Task AddPlayerScoreAsync(string leaderboardId, int score) {
+        try {
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, score);
+        }
+
+        catch (Exception e) {
+            Debug.Log(e.Message);
+            throw;
+        }
+    }
+
     public void OpenFruitLeaderboard() {
-        ScenesManager.Instance.LoadScene(ScenesManager.Scene.MainMenu);
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.FruitLeaderboard);
     }
 
     public void OpenMainMenu() {

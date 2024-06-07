@@ -12,23 +12,32 @@ public class ScenesManager : MonoBehaviour
     }
 
     public enum Scene {
+        // Menus
         SignInScreen,
         MainMenu,
         AccountScreen,
+
+        // Leaderboards
         WordleLeaderboard,
         DinoLeaderboard,
         BeeLeaderboard,
         BirdLeaderboard,
         SHS2048Leaderboard,
+        FruitLeaderboard,
+
+        // Wordles
         Wordle,
         WordleLvl2,
         WordleLvl3,
         WordleLvl4,
         WordleLvl5,
+
+        // Other Games
         DinoGame,
         SpellingBee,
         FlappyBird,
-        SHS2048
+        SHS2048,
+        FruitNinja
     }
 
     public void LoadScene(Scene scene) {

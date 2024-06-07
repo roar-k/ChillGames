@@ -89,4 +89,8 @@ public class LeaderboardManager : MonoBehaviour
     public void Play2048() {
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.SHS2048);
     }
+
+    public void PlayFruit() {
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.FruitNinja);
+    }
 }
